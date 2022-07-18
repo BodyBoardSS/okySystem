@@ -6,14 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     programado: {type: DataTypes.DATE,field:'PROGRAMADO'},
     direccion: {type: DataTypes.STRING,field:'DIRECCION'}
   },{
-    tableName: "pedido", timestamps: false,freezeTableName: true, create'use strict';
-
-module.exports = (sequelize, DataTypes) => {
-  const Pedido = sequelize.define('Pedido',{
-    totalPedido: {type: DataTypes.DOUBLE,field:'TOTALPEDIDO'},
-    programado: {type: DataTypes.DATE,field:'PROGRAMADO'},
-    direccion: {type: DataTypes.STRING,field:'DIRECCION'}
-  },{
     tableName: "pedido", timestamps: false,freezeTableName: true, createdAt:false,updatedAt:false
   });
 

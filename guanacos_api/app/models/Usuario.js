@@ -16,24 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     email: {
-      type: DataTypes.STRI'use strict';
-
-module.exports = (sequelize, DataTypes) => {
-  const Usuario = sequelize.define('Usuario',{
-    nombre: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isAlpha: {
-          msg: "El nombre solo puede contener letras"
-        },
-        len: {
-          args: [2, 255],
-          msg: "El nombre debe de ser mayor a 2 caracteres"
-        }
-      }
-    },
-    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,

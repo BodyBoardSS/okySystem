@@ -9,17 +9,6 @@ module.exports = {
     signIn(req, res) {
         let { email, password } = req.body;
 
-        Usconst { Usuario } = require('../models/index')
-const bcryp = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const authConfig = require('../../config/auth')
-
-module.exports = {
-
-    //Login
-    signIn(req, res) {
-        let { email, password } = req.body;
-
         Usuario.findOne({
             where: {
                 email: email
