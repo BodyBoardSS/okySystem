@@ -1,6 +1,4 @@
-.env
-node_modules/
-/package-lock.jsonconst path = require('path');
+const path = require('path');
 
 module.exports = {
   'config': path.resolve('config', 'database.js'),

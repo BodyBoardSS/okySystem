@@ -5,15 +5,23 @@ module.exports = (sequelize, DataTypes) => {
     rol: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    route: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },{
-    tableName: "rol",freezeTableName: true
+    tableName: "roles",freezeTableName: true
   });
 
   Rol.associate = function(models) {
-    Rol.belongsToMany(models.Usuario, {
-        as: "usuarios", 
-        through: "usuario_rol", 
+    Rol.belongsToMany(models.User, {
+        as: "users", 
+        through: "user_rol", 
         foreignKey: "idrol"
       });
   }
