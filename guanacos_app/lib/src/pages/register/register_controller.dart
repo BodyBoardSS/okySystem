@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:gunanacos_app/src/providers/user_provider.dart';
+
+import '../../models/User.dart';
 
 class RegisterController extends GetxController{
 
@@ -9,12 +12,14 @@ class RegisterController extends GetxController{
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  UserProvider userProvider = UserProvider();
   
   void goToRegisterPage() {
     Get.toNamed('/register');
   }
 
-  void register(){
+  void register() async{
     String email = emailController.text.trim();
     String name = nameController.text;
     String lastName = lastNameController.text;
@@ -23,7 +28,17 @@ class RegisterController extends GetxController{
     String confirmPassword = confirmPasswordController.text.trim();
 
     if(isValidForm(email, name, lastName, phone, password, confirmPassword)){
-      //Ready to call service
+      User user = User(
+        email: email,
+        name: name,
+        lastName: lastName,
+        phone: phone,
+        password: password,
+        idrol: '2'
+      );
+
+      Response response = await userProvider.create(user);
+      print('Response: ${response.body}');
     }
   }
 
