@@ -9,6 +9,12 @@ module.exports = {
 
     //Login
     signIn(req, res) {
+
+        if(!req.body.email || !req.body.password){
+            res.status(401).json("Faltan campos requeridos")
+            return
+        }
+        
         let { email, password } = req.body;
 
         User.findOne({
@@ -95,6 +101,12 @@ module.exports = {
 
     //Register with image
     async signUpWithImage(req, res) {
+
+        if(!req.body.email || !req.body.password || !req.body.name || !req.body.lastName || req.body.phone){
+            res.status(401).json("Faltan campos requeridos")
+            return
+        }
+
         //Crear usuario
         let password = bcryp.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
         let image = '';
