@@ -37,7 +37,7 @@ module.exports = {
                         const data = {
                             id: user.id,
                             name: user.name,
-                            lastname: user.lastname,
+                            lastName: user.lastName,
                             email: user.email,
                             phone: user.phone,
                             image: user.image,
@@ -126,12 +126,16 @@ module.exports = {
                 message: 'Favor intente con un correo o telefono distinto.'
             });
         } else {
-            if(files.length > 0){
-                const path = `image_${Date.now()}`;
-                const url = await storage(files[0], path)
-                if(url != undefined && url != null)
-                    image = url
-            }
+            if(files)
+                if(files.length > 0){
+                    console.log(`files.length: ${files.length}`)
+                    const path = `image_${Date.now()}`;
+                    const url = await storage(files[0], path)
+                    if(url != undefined && url != null)
+                        image = url
+
+                    console.log(`Image: ${image}`)
+                }
     
             User.create({
                 name: req.body.name,
@@ -155,7 +159,7 @@ module.exports = {
                 const data = {
                     id: user.id,
                     name: user.name,
-                    lastname: user.lastname,
+                    lastName: user.lastName,
                     email: user.email,
                     phone: user.phone,
                     image: user.image,
