@@ -1,22 +1,47 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:gunanacos_app/src/models/ResponseAPI.dart';
+import 'package:gunanacos_app/src/models/User.dart';
+import 'package:gunanacos_app/src/providers/user_provider.dart';
 
 class LoginController extends GetxController{
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  UserProvider userProvider = UserProvider();
   
   void goToRegisterPage() {
     Get.toNamed('/register');
   }
 
-  void login(){
+  void login() async{
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
     if(isValidForm(email, password)){
-      //Ready to call service
+      ResponseApi responseApi = await userProvider.login(email, password);
+
+      User myUser = User.fromJson(GetStorage().read('user') ?? {});
+
+      if(responseApi.success == true){
+        GetStorage().write('user', responseApi.data);
+        if(myUser.roles!.length > 1)
+          goToRolesPage();
+        else
+          goToClientProductPage();
+      }
+      else
+        Get.snackbar('Error', responseApi.message ?? '');
     }
+  }
+
+  void goToClientProductPage() {
+    Get.offNamedUntil('/client/products/list', (route) => false);
+  }
+  void goToRolesPage(){
+    Get.offNamedUntil('/roles', (route) => false);
   }
 
   bool isValidForm(String email, String password){

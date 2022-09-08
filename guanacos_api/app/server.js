@@ -1,13 +1,19 @@
 const express = require('express');
 const app = express();
 const { sequelize } = require('./models/index')
+const cors = require('cors');
 
 //Settings
 const PORT = process.env.PORT || 3001;
 
+app.use(cors());
+
 //Middlewares
+// For parsing application/json
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.disable('x-powered-by');
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({extended: true}))
 
 //Routes
 app.use(require('./routes'))

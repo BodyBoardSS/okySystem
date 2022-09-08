@@ -16,6 +16,8 @@ migrate_working_dir/
 *.iws
 .idea/
 
+pubspec.lock # library relate lock files
+
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
@@ -45,3 +47,30 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/ephemeral
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*sync/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+
+**/android/**/gradle-wrapper.jar
+.gradle/
+**/android/captures/
+**/android/gradlew.bat
+**/android/gradlew
+**/android/local.properties
+**/android/key.properties
+*.jks
+
+.classpath
+.project
+.settings/
+.vscode/

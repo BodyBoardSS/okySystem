@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:gunanacos_app/src/models/User.dart';
+import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 
+import 'package:gunanacos_app/src/pages/home/home_page.dart';
 import 'package:gunanacos_app/src/pages/login/login_page.dart';
 import 'package:gunanacos_app/src/pages/register/register_page.dart';
+import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
+import 'package:gunanacos_app/src/pages/roles/roles_page.dart';
 
-void main() {
+User uSession = User.fromJson(GetStorage().read('user') ?? {});
+
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -27,10 +37,15 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       title: 'GuanacosApp',
       debugShowCheckedModeBanner:false,
-      initialRoute: '/',
+      initialRoute: uSession.id != null ? uSession.roles!.length > 1 ? '/roles':'/client/products/list':'/',
       getPages: [
           GetPage(name: '/', page: () => LoginPage()),
-          GetPage(name: '/register', page: () => RegisterPage())
+          GetPage(name: '/register', page: () => RegisterPage()),
+          GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/roles', page: () => RolesPage()),
+          GetPage(name: '/restaurant/order/list', page: () => RestaurantOrdersListPage()),
+          GetPage(name: '/client/products/list', page: () => ClientProductsListPage()),
+          GetPage(name: '/delivery/orders/list', page: () => DeliveryOrdersListPage()),
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,

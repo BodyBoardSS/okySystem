@@ -25,7 +25,7 @@ class FormRegister extends StatelessWidget {
             _txtFieldPhone(),
             _txtFieldPassword(),
             _txtFieldConfirmPassword(),
-            _buttonRegister(),
+            _buttonRegister(context),
           ],
         ),
       ),
@@ -117,12 +117,12 @@ class FormRegister extends StatelessWidget {
     );
   }
 
-  Widget _buttonRegister() {
+  Widget _buttonRegister(BuildContext context) {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       child: ElevatedButton(
-          onPressed: () => registerController.register(),
+          onPressed: () => registerController.register(context),
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15)),
           child: Text(
@@ -132,6 +132,28 @@ class FormRegister extends StatelessWidget {
           )),
     );
   }
+}
+
+Widget imageUser(BuildContext context) {
+  RegisterController registerController = Get.put(RegisterController());
+  return SafeArea(
+    child: Container(
+      alignment: Alignment.topCenter,
+      margin: EdgeInsets.only(top: 20),
+      child: GestureDetector(
+        onTap: () => registerController.showAlertDialog(context),
+        child: GetBuilder<RegisterController>(
+          builder: (value) => CircleAvatar(
+            backgroundImage: registerController.imgFile != null
+                ? FileImage(registerController.imgFile!)
+                : AssetImage('assets/img/user_profile.png') as ImageProvider,
+            radius: 60,
+            backgroundColor: Colors.amber,
+          ),
+        ),
+      ),
+    ),
+  );
 }
 
 Widget buttonBack() {
@@ -146,21 +168,4 @@ Widget buttonBack() {
           size: 30,
         )),
   ));
-}
-
-Widget imageUser() {
-  return SafeArea(
-    child: Container(
-      alignment: Alignment.topCenter,
-      margin: EdgeInsets.only(top: 20),
-      child: GestureDetector(
-        onTap: () {},
-        child: CircleAvatar(
-          backgroundImage: AssetImage('assets/img/user_profile.png'),
-          radius: 60,
-          backgroundColor: Colors.amber,
-        ),
-      ),
-    ),
-  );
 }

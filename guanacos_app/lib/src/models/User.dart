@@ -1,11 +1,6 @@
-import 'dart:convert';
-
-User userFromJson(String str) => User.fromJson(json.decode(str));
-
-String userToJson(User data) => json.encode(data.toJson());
+import 'package:gunanacos_app/src/models/Rol.dart';
 
 class User {
-
     int? id;
     String? name;
     String? lastName;
@@ -14,6 +9,8 @@ class User {
     String? image;
     String? password;
     String? idrol;
+    List<Rol>? roles;
+    String? sessionToken;
 
     User({
         this.id,
@@ -23,9 +20,10 @@ class User {
         this.phone,
         this.image,
         this.password,
-        this.idrol
+        this.roles,
+        this.sessionToken,
+        this.idrol,
     });
-
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -35,6 +33,9 @@ class User {
         phone: json["phone"],
         image: json["image"],
         password: json["password"],
+        idrol: json["idrol"],
+        roles: json["roles"] == null ? [] : List<Rol>.from(json["roles"].map((x) => Rol.fromJson(x))),
+        sessionToken: json["session_token"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -45,6 +46,8 @@ class User {
         "phone": phone,
         "image": image,
         "password": password,
-        "idrol":idrol
+        "roles": roles,
+        "session_token": sessionToken,
+        "idrol": idrol,
     };
 }

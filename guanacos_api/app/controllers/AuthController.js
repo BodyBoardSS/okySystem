@@ -23,7 +23,11 @@ module.exports = {
             }
         }).then(user => {
             if (!user) {
-                res.status(404).json({ msg: "El usuario no fue encontrado" })
+                res.status(404).json({
+                    success: false,
+                    message: 'El usuario no fue encontrado',
+                    data: null
+                })
             } else {
                 if (bcryp.compareSync(password, user.password)) {
                     //Crear token
@@ -52,11 +56,19 @@ module.exports = {
                         })
                     })
                 } else {
-                    res.status(401).json({ msg: "El password es incorrecto" })
+                    res.status(401).json({
+                        success: false,
+                        message: 'El password es incorrecto',
+                        data: null
+                    })
                 }
             }
         }).catch(err => {
-            res.status(500).json(err)
+            res.status(401).json({
+                success: false,
+                message: err,
+                data: null
+            })
         })
 
     },
@@ -102,20 +114,26 @@ module.exports = {
     //Register with image
     async signUpWithImage(req, res) {
 
-        if(!req.body.email || !req.body.password || !req.body.name || !req.body.lastName || req.body.phone){
-            res.status(401).json("Faltan campos requeridos")
-            return
+        const userReq = JSON.parse(req.body.user);
+
+        if(!userReq.email || !userReq.password || !userReq.name || !userReq.lastName || !userReq.phone){
+            return res.status(401).json({
+                success: false,
+                message: "Faltan campos requeridos",
+                data: []
+            });
+            
         }
 
         //Crear usuario
-        let password = bcryp.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
+        let password = bcryp.hashSync(userReq.password, Number.parseInt(authConfig.rounds))
         let image = '';
         const files = req.files;
         let isExistUser = await User.count({ 
             where: {
                     [Op.or] : [
-                            {email: req.body.email},
-                            {phone: req.body.phone}
+                            {email: userReq.email},
+                            {phone: userReq.phone}
                     ]
             }
         })
@@ -123,7 +141,8 @@ module.exports = {
         if(isExistUser == 1) {
             return res.status(409).json({
                 success: false,
-                message: 'Favor intente con un correo o telefono distinto.'
+                message: 'Favor intente con un correo o telefono distinto.',
+                data: []
             });
         } else {
             if(files)
@@ -138,16 +157,16 @@ module.exports = {
                 }
     
             User.create({
-                name: req.body.name,
-                email: req.body.email,
-                lastName: req.body.lastName,
-                phone: req.body.phone,
+                name: userReq.name,
+                email: userReq.email,
+                lastName: userReq.lastName,
+                phone: userReq.phone,
                 password: password,
                 image: image
             }).then(user => {
 
                 UserRol.create({
-                    idRol:req.body.idrol,
+                    idRol:userReq.idrol,
                     idUser:user.id,
                 });
 
@@ -173,7 +192,11 @@ module.exports = {
                 })
     
             }).catch(err => {
-                res.status(500).json(err)
+                res.status(500).json({
+                    success: false,
+                    message: err,
+                    data: []
+                });
             })
         }
     }
