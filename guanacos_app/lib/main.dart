@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/User.dart';
 import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:gunanacos_app/src/pages/client/profile/profile_info_update_page.dart';
 import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 
 import 'package:gunanacos_app/src/pages/home/home_page.dart';
@@ -46,21 +47,23 @@ class _MyAppState extends State<MyApp> {
           GetPage(name: '/restaurant/order/list', page: () => RestaurantOrdersListPage()),
           GetPage(name: '/client/products/list', page: () => ClientProductsListPage()),
           GetPage(name: '/delivery/orders/list', page: () => DeliveryOrdersListPage()),
+          GetPage(name: '/client/profile/update', page: () => ProfileUpdatePage()),
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,
         colorScheme: ColorScheme(
-          brightness: Brightness.light, 
-          primary: Colors.amber, 
+          brightness: Brightness.light,
+          primary: Colors.amber,
           onPrimary: Colors.grey,
-          secondary: Colors.amberAccent, 
-          onSecondary: Colors.grey, 
-          error: Colors.grey, 
-          onError: Colors.grey, 
-          background: Colors.grey, 
-          onBackground: Colors.grey, 
-          surface: Colors.grey, 
-          onSurface: Colors.grey)
+          secondary: Colors.amberAccent,
+          onSecondary: Colors.grey,
+          error: Colors.grey,
+          onError: Colors.grey,
+          background: Color(0xff61481C),
+          onBackground: Color(0xff61481C),
+          surface: Colors.grey,
+          onSurface: Colors.grey
+        )
       ),
       navigatorKey: Get.key,
     );

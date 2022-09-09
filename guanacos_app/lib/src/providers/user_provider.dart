@@ -14,8 +14,6 @@ class UserProvider extends GetConnect {
   String url = Environment.API_URL+"api";
 
   Future<Response> create(User user) async{
-    print('$url/signUpWithImage');
-    print(user.toJson());
     Response response = await post(
       '$url/signUpWithImage',
       user.toJson(),
@@ -29,7 +27,7 @@ class UserProvider extends GetConnect {
 
   Future<Stream> createWithImage(User user, File img) async{
     Uri uri = Uri.http(Environment.API_URL_OLD, '/api/signUpWithImage');
-    print('URI ${uri}');
+
     final request = http.MultipartRequest('POST', uri);
     request.files.add(http.MultipartFile(
       'image',

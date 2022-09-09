@@ -51,10 +51,9 @@ class RegisterController extends GetxController{
         password: password,
         idrol: '2'
       );
-      print('User: ${user.toJson()}');
+
       Stream stream = await userProvider.createWithImage(user, imgFile!);
       stream.listen((res) {
-        print('User: ${res}');
         progressDialog.close();
         ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
         if(responseApi.success == true){

@@ -23,10 +23,9 @@ class LoginController extends GetxController{
     if(isValidForm(email, password)){
       ResponseApi responseApi = await userProvider.login(email, password);
 
-      User myUser = User.fromJson(GetStorage().read('user') ?? {});
-
       if(responseApi.success == true){
         GetStorage().write('user', responseApi.data);
+        User myUser = User.fromJson(GetStorage().read('user') ?? {});
         if(myUser.roles!.length > 1)
           goToRolesPage();
         else

@@ -14,7 +14,7 @@ class RolesPage extends StatelessWidget {
         title: Text('Seleccionar rol', style: TextStyle(color: Colors.black)),
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.2),
+        margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.12),
         child: ListView(
           children: rolesController.user.roles != null ? rolesController.user.roles!.map((Rol rol){
             return _cardRol(rol);
@@ -30,12 +30,12 @@ class RolesPage extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 15),
+            margin: EdgeInsets.only(bottom: 15, top: 15),
             height: 100,
             child: FadeInImage(
               image: NetworkImage(rol.image!),
               fit: BoxFit.contain,
-              fadeInDuration: Duration(microseconds: 50),
+              fadeInDuration: Duration(milliseconds: 50),
               placeholder: AssetImage('assets/img/no-image.png'),
             ),
           ),
