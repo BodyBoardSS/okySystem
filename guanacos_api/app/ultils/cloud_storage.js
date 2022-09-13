@@ -7,11 +7,11 @@ const uuid = uuidv4();
 
 
 const storage = new Storage({
-    projectId: "guanacos-app",
+    projectId: "guanacosapp",
     keyFilename: './serviceAccountKey.json'
 });
 
-const bucket = storage.bucket("gs://guanacos-app.appspot.com/");
+const bucket = storage.bucket("gs://guanacosapp.appspot.com/");
 
 /**
  * Subir el archivo a Firebase Storage
