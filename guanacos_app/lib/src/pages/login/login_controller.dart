@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/ResponseAPI.dart';
+import 'package:gunanacos_app/src/models/response_api.dart';
 import 'package:gunanacos_app/src/models/User.dart';
 import 'package:gunanacos_app/src/providers/user_provider.dart';
 
@@ -26,13 +26,15 @@ class LoginController extends GetxController{
       if(responseApi.success == true){
         GetStorage().write('user', responseApi.data);
         User myUser = User.fromJson(GetStorage().read('user') ?? {});
-        if(myUser.roles!.length > 1)
+        if(myUser.roles!.length > 1) {
           goToRolesPage();
-        else
+        } else {
           goToClientProductPage();
+        }
       }
-      else
+      else {
         Get.snackbar('Error', responseApi.message ?? '');
+      }
     }
   }
 

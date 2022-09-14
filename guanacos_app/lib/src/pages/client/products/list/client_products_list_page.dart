@@ -7,6 +7,7 @@ import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_lis
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
 
+// ignore: must_be_immutable
 class ClientProductsListPage extends StatelessWidget {
 
   ClientProductsListController clientController = Get.put(ClientProductsListController());
@@ -16,6 +17,8 @@ class ClientProductsListPage extends StatelessWidget {
     DeliveryOrdersListPage(),
     ProfileInfoPage()
   ];
+
+  ClientProductsListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +36,27 @@ class ClientProductsListPage extends StatelessWidget {
   Widget _bottonBar(){
     return Obx(() => CustomAnimatedBottomBar(
         containerHeight: 70,
-        backgroundColor:  Color(0xffA47E3B),
+        backgroundColor:  const Color(0xffA47E3B),
         showElevation: true,
         curve: Curves.easeIn,
         selectedIndex: clientController.indexTab.value,
         onItemSelected: (index) => clientController.changeTab(index),
         items: [
           BottomNavyBarItem(
-              icon: Icon(Icons.apps),
-              title: Text('Inicio'),
+              icon:const Icon(Icons.apps),
+              title: const Text('Inicio'),
               activeColor: Colors.white,
               inactiveColor: Colors.amber
           ),
           BottomNavyBarItem(
-              icon: Icon(Icons.list),
-              title: Text('Pedidos'),
+              icon:const Icon(Icons.list),
+              title:const Text('Pedidos'),
               activeColor: Colors.white,
               inactiveColor: Colors.amber
           ),
           BottomNavyBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Perfil'),
+              icon:const Icon(Icons.person),
+              title:const Text('Perfil'),
               activeColor: Colors.white,
               inactiveColor: Colors.amber
           )

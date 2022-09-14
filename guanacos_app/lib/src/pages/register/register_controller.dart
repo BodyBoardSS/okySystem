@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/ResponseAPI.dart';
+import 'package:gunanacos_app/src/models/response_api.dart';
 
 import 'package:gunanacos_app/src/providers/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,8 +58,9 @@ class RegisterController extends GetxController{
         if(responseApi.success == true){
           GetStorage().write('user', responseApi.data);
           goToHome();
-        } else
+        } else {
           Get.snackbar('Error', responseApi.message ?? '');
+        }
       });
     }
   }
@@ -124,7 +124,7 @@ class RegisterController extends GetxController{
           Get.back();
           selectImage(ImageSource.gallery);
         },
-        child: Text('Gallery')
+        child: const Text('Gallery')
     );
 
     Widget cameraButton = ElevatedButton(
@@ -132,11 +132,11 @@ class RegisterController extends GetxController{
           Get.back();
           selectImage(ImageSource.camera);
         },
-        child: Text('Camera')
+        child: const Text('Camera')
     );
 
     AlertDialog alertDialog = AlertDialog(
-      title: Text('Seleccione una opción'),
+      title: const Text('Seleccione una opción'),
       actions: [
         galleryButton,
         cameraButton

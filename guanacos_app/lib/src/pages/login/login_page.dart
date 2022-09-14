@@ -7,21 +7,24 @@ import 'package:gunanacos_app/src/widgets/background.dart';
 import 'package:gunanacos_app/src/pages/login/form_login.dart';
 import 'package:gunanacos_app/src/widgets/title_page.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
+  LoginPage({Key? key}) : super(key: key);
   
   LoginController loginController = Get.put(LoginController());
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
           height: 50,
-          child: _textDontHaveAccount(),
           decoration: BoxDecoration(
-              color: Color(0xff61481C),
-              border: Border.all(color: Color(0xff61481C), width: 0.0))),
+              color:const Color(0xff61481C),
+              border: Border.all(color:const Color(0xff61481C), width: 0.0)),
+          child: _textDontHaveAccount()),
       body: Stack(
-        children: [Background(), _HomeBody(), FormLogin()],
+        children: [const Background(), _HomeBody(), FormLogin()],
       ),
     );
   }
@@ -30,17 +33,17 @@ class LoginPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           'No tienes cuenta?',
           style: TextStyle(
               color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           width: 7,
         ),
         GestureDetector(
           onTap: () => loginController.goToRegisterPage(),
-          child: Text('Registrate aquí',
+          child:const Text('Registrate aquí',
               style: TextStyle(
                   color: Colors.amber,
                   fontWeight: FontWeight.bold,
@@ -53,13 +56,11 @@ class LoginPage extends StatelessWidget {
 class _HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          //Titulos
-          TitlePage()
-        ],
-      ),
+    return Column(
+      children: const [
+        //Titulos
+        TitlePage()
+      ],
     );
   }
 }
