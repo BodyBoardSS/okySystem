@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/user.dart';
 import 'package:http/http.dart' as http;
 // ignore: depend_on_referenced_packages
@@ -14,6 +15,8 @@ import 'package:gunanacos_app/src/models/response_api.dart';
 
 class UserProvider extends GetConnect {
   String url = "${Environment.apiUrl}api";
+
+  User user = User.fromJson(GetStorage().read('user') ?? {});
 
   Future<Response> create(User user) async{
     Response response = await post(
@@ -45,6 +48,25 @@ class UserProvider extends GetConnect {
     return response.stream.transform(utf8.decoder);
   }
 
+  Future<Stream> updateWithImage(User user, File img) async{
+    Uri uri = Uri.http(Environment.apiUrlOld, '/api/users/updateWithImage');
+
+    final request = http.MultipartRequest('PUT', uri);
+    request.headers['Authorization'] = user.sessionToken ?? '';
+    request.files.add(http.MultipartFile(
+      'image',
+      http.ByteStream(img.openRead().cast()),
+      await img.length(),
+      filename: p.basename(img.path)
+    ));
+
+    request.fields['user'] = json.encode(user);
+
+    final response = await request.send();
+
+    return response.stream.transform(utf8.decoder);
+  }
+
   Future<ResponseApi> login(String email, String password) async{
     Response response = await post(
       '$url/signin',
@@ -53,12 +75,37 @@ class UserProvider extends GetConnect {
           'password':password
         },
       headers: {
-        'Content-Type' : 'application/json'
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
       }
     );
 
     if(response.body == null) {
       Get.snackbar("Error", "No se pudo ejecutar la petición");
+      return ResponseApi();
+    }
+
+    if(response.statusCode == 401) {
+      Get.snackbar("Error", "No está autorizado para realizar esta petición");
+      return ResponseApi();
+    }
+
+    ResponseApi responseApi = ResponseApi.fromJson(response.body);
+    return responseApi;
+  }
+
+  Future<ResponseApi> update(User user) async{
+    Response response = await put(
+      '$url/signin',
+        user.toJson(),
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
+      }
+    );
+
+    if(response.body == null) {
+      Get.snackbar("Error", "No se pudo actualizar la información");
       return ResponseApi();
     }
 

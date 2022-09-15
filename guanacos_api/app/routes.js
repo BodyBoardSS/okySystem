@@ -18,7 +18,8 @@ const AuthController = require('./controllers/AuthController')
 const CategoryController = require('./controllers/CategoryController')
 const ProductController = require('./controllers/ProductController')
 const PaymentMethodController = require('./controllers/PaymentMethodController')
-const OrderController = require('./controllers/OrderController')
+const OrderController = require('./controllers/OrderController');
+const UserController = require('./controllers/UserController');
 
 //Routes
 router.get('/', (req, res) => {
@@ -29,6 +30,11 @@ router.get('/', (req, res) => {
 router.post('/api/signin', AuthController.signIn)
 router.post('/api/signup', AuthController.signUp)
 router.post('/api/signUpWithImage',upload.array('image',1), AuthController.signUpWithImage)
+
+//Users
+router.put('/api/users/updateWithImage', auth, upload.array('image',1), UserController.updateUserWithImage)
+router.put('/api/users', auth, UserController.update)
+
 
 //Categories
 router.get('/api/category', auth, CategoryController.index)

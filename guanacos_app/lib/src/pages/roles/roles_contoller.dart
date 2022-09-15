@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/Rol.dart';
-import 'package:gunanacos_app/src/models/User.dart';
+import 'package:gunanacos_app/src/models/rol.dart';
+import 'package:gunanacos_app/src/models/user.dart';
 
 class RolesController extends GetxController {
   User user = User.fromJson(GetStorage().read('user') ?? {});

@@ -9,8 +9,7 @@ import 'package:gunanacos_app/src/models/response_api.dart';
 import 'package:gunanacos_app/src/providers/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
-
-import '../../models/User.dart';
+import 'package:gunanacos_app/src/models/user.dart';
 
 class RegisterController extends GetxController{
 

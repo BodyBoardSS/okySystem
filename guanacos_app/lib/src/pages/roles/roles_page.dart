@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/Rol.dart';
+import 'package:gunanacos_app/src/models/rol.dart';
 import 'package:gunanacos_app/src/pages/roles/roles_contoller.dart';
 
 // ignore: must_be_immutable

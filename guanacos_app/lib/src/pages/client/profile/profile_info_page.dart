@@ -16,13 +16,13 @@ class ProfileInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Obx(() => Stack(
         children: [
           const BackgroundApp(),
           _imageUser(context),
           _options(context)
         ],
-      ),
+      )),
     );
   }
 
@@ -60,8 +60,8 @@ class ProfileInfoPage extends StatelessWidget {
             alignment: Alignment.topCenter,
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
             child: CircleAvatar(
-                backgroundImage: profileInfoController.user.image != null
-                    ? NetworkImage(profileInfoController.user.image!)
+                backgroundImage: profileInfoController.user.value.image != null
+                    ? NetworkImage(profileInfoController.user.value.image!)
                     : const AssetImage('assets/img/user_profile.png') as ImageProvider,
                 radius: 60,
                 backgroundColor: Colors.amber,
@@ -71,7 +71,7 @@ class ProfileInfoPage extends StatelessWidget {
             height: 10,
           ),
           Text(
-              '${profileInfoController.user.name!} ${profileInfoController.user.lastName!}',
+              '${profileInfoController.user.value.name!} ${profileInfoController.user.value.lastName!}',
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,

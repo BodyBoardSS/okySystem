@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -27,7 +26,7 @@ class _Box extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: 500,
-        height: MediaQuery.of(context).size.height * 0.45,
+        height: MediaQuery.of(context).size.height * 0.50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(1),
           gradient: const LinearGradient(

@@ -1,4 +1,4 @@
-import 'package:gunanacos_app/src/models/Rol.dart';
+import 'package:gunanacos_app/src/models/rol.dart';
 
 class User {
     int? id;

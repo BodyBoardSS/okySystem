@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/models/User.dart';
+import 'package:gunanacos_app/src/models/user.dart';
 import 'package:gunanacos_app/src/providers/user_provider.dart';
 
 class LoginController extends GetxController{
@@ -29,7 +29,7 @@ class LoginController extends GetxController{
         if(myUser.roles!.length > 1) {
           goToRolesPage();
         } else {
-          goToClientProductPage();
+          goToClientHomePage();
         }
       }
       else {
@@ -38,8 +38,8 @@ class LoginController extends GetxController{
     }
   }
 
-  void goToClientProductPage() {
-    Get.offNamedUntil('/client/products/list', (route) => false);
+  void goToClientHomePage() {
+    Get.offNamedUntil('/client/home', (route) => false);
   }
   void goToRolesPage(){
     Get.offNamedUntil('/roles', (route) => false);

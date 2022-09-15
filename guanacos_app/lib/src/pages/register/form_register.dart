@@ -13,8 +13,8 @@ class FormRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.25, left: 50, right: 50),
-      height: MediaQuery.of(context).size.height * 0.65,
+          top: MediaQuery.of(context).size.height * 0.30, left: 50, right: 50),
+      height: MediaQuery.of(context).size.height * 0.60,
       width: MediaQuery.of(context).size.height * 1,
       decoration: BoxDecoration(
           color:const Color.fromRGBO(97, 72, 28, 0.7),
@@ -168,7 +168,7 @@ Widget buttonBack() {
         onPressed: () => Get.back(),
         icon:const Icon(
           Icons.arrow_back_ios,
-          color: Colors.amber,
+          color: Colors.white,
           size: 30,
         )),
   ));

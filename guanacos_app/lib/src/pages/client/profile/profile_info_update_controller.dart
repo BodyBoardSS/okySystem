@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/response_api.dart';
 import 'package:gunanacos_app/src/models/user.dart';
+import 'package:gunanacos_app/src/pages/client/profile/profile_info_controller.dart';
 import 'package:gunanacos_app/src/providers/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
@@ -14,7 +15,9 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 class ProfileUpdateController extends GetxController{
 
   User user = User.fromJson(GetStorage().read('user') ?? {});
-
+  UserProvider userProvider = UserProvider();
+  ProfileInfoController profileInfoController = Get.find();
+  
   TextEditingController nameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -22,7 +25,6 @@ class ProfileUpdateController extends GetxController{
   ImagePicker imgPicker = ImagePicker();
   File? imgFile;
 
-  UserProvider userProvider = UserProvider();
 
   ProfileUpdateController(){
     nameController.text = user.name??'';
@@ -44,18 +46,31 @@ class ProfileUpdateController extends GetxController{
         name: name,
         lastName: lastName,
         phone: phone,
+        sessionToken: user.sessionToken
       );
-
-      Stream stream = await userProvider.createWithImage(myUser, imgFile!);
-      stream.listen((res) {
+      
+      if(imgFile == null){
+        ResponseApi responseApi = await userProvider.update(myUser);
         progressDialog.close();
-        ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
         if(responseApi.success == true){
-          GetStorage().write('user', responseApi.data);
-        } else {
-          Get.snackbar('Error', responseApi.message ?? '');
+          GetStorage().write('user',responseApi.data);
+          profileInfoController.user.value = User.fromJson(GetStorage().read('user') ?? {});
+          Get.snackbar('Exito', responseApi.message ?? '');
         }
-      });
+      } else {
+          Stream stream = await userProvider.updateWithImage(myUser, imgFile!);
+          stream.listen((res) {
+            progressDialog.close();
+            ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+            if(responseApi.success == true){
+                GetStorage().write('user',responseApi.data);
+                Get.snackbar('Exito', responseApi.message ?? '');
+                profileInfoController.user.value = User.fromJson(GetStorage().read('user') ?? {});
+            } else {
+              Get.snackbar('Error', responseApi.message ?? '');
+            }
+          });
+      }
     }
   }
 
