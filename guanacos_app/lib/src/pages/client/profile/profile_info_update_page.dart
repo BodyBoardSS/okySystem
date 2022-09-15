@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_update_controller.dart';
-import 'package:gunanacos_app/src/widgets/background_app.dart';
+import 'package:gunanacos_app/src/widgets/background_profile.dart';
 
 // ignore: must_be_immutable
 class ProfileUpdatePage extends StatelessWidget {
@@ -16,7 +16,7 @@ class ProfileUpdatePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const BackgroundApp(), 
+          const BackgroundProfile(), 
           _buttonBack(), 
           imageUser(context),
           _formUpdate(context)
@@ -121,8 +121,11 @@ class ProfileUpdatePage extends StatelessWidget {
           child:const Text(
             'Actualizar',
             style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
-          )),
+                color: Color(0xff61481C), fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+
+          
+          ),
     );
   }
 

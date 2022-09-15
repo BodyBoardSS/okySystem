@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_controller.dart';
+import 'package:gunanacos_app/src/widgets/background_app.dart';
 
 // ignore: must_be_immutable
 class RestaurantOrdersListPage extends StatelessWidget {
@@ -14,12 +15,11 @@ class RestaurantOrdersListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:const Text('Restaurante'),),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: ()=> restaurantController.logOut(),
-          child:const Text('Salir'),
-        ),
+      body: Stack(
+        children:const [
+          BackgroundApp(),
+          Center(child: Text('Restaurant'))
+        ] 
       ),
     );
   }

@@ -13,6 +13,8 @@ import 'package:gunanacos_app/src/pages/home/home_page.dart';
 import 'package:gunanacos_app/src/pages/login/login_page.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_update_page.dart';
 import 'package:gunanacos_app/src/pages/register/register_page.dart';
+import 'package:gunanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
+import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/pages/roles/roles_page.dart';
 
@@ -52,6 +54,8 @@ class _MyAppState extends State<MyApp> {
           GetPage(name: '/client/products/list', page: () => ClientProductsListPage()),
           GetPage(name: '/client/products/info', page: () => ProfileInfoPage()),
           GetPage(name: '/client/profile/update', page: () => ProfileUpdatePage()),
+          GetPage(name: '/restaurant/home', page: () => RestaurantHomePage()),
+          GetPage(name: '/restaurant/category/create', page: () => const CategoryCreatePage()),
           GetPage(name: '/delivery/orders/list', page: () => DeliveryOrdersListPage()),
       ],
       theme: ThemeData(

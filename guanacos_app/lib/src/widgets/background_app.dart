@@ -6,37 +6,31 @@ class BackgroundApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var boxDecoration = const BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+          Color(0xffA47E3B),
+          Color(0xff61481C),
+        ]),
+        );
 
     return Stack(
-      children: const [
-         Positioned(
-          top: -100,
-          left: -30,
-          child: _Box()
-        )
+      children: [
+        Container( 
+          decoration: boxDecoration,
+        ),
+        Container(
+          margin: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.15
+          ),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(60)),
+              color: Colors.white
+            ),
+          ),
       ],
     );
-  }
-}
-
-class _Box extends StatelessWidget {
-  const _Box({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: 500,
-        height: MediaQuery.of(context).size.height * 0.50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1),
-          gradient: const LinearGradient(
-              colors: [
-                Color.fromRGBO(230, 179, 37, 1),
-                Color.fromRGBO(191, 151, 66,1)
-              ]
-          )
-          ,
-        ),
-      );
   }
 }

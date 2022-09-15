@@ -50,7 +50,6 @@ class UserProvider extends GetConnect {
 
   Future<Stream> updateWithImage(User user, File img) async{
     Uri uri = Uri.http(Environment.apiUrlOld, '/api/users/updateWithImage');
-
     final request = http.MultipartRequest('PUT', uri);
     request.headers['Authorization'] = user.sessionToken ?? '';
     request.files.add(http.MultipartFile(
@@ -61,13 +60,13 @@ class UserProvider extends GetConnect {
     ));
 
     request.fields['user'] = json.encode(user);
-
     final response = await request.send();
-
+    print(response.toString());
     return response.stream.transform(utf8.decoder);
   }
 
   Future<ResponseApi> login(String email, String password) async{
+    print('Email: ${email}, Pass: ${password}');
     Response response = await post(
       '$url/signin',
         {
@@ -75,12 +74,12 @@ class UserProvider extends GetConnect {
           'password':password
         },
       headers: {
-        'Content-Type' : 'application/json',
-        'Authorization' : user.sessionToken ?? ''
+        'Content-Type' : 'application/json'
       }
     );
 
     if(response.body == null) {
+      print('statusCode: ${response.statusCode}');
       Get.snackbar("Error", "No se pudo ejecutar la petición");
       return ResponseApi();
     }
@@ -95,14 +94,16 @@ class UserProvider extends GetConnect {
   }
 
   Future<ResponseApi> update(User user) async{
+
     Response response = await put(
-      '$url/signin',
+        '$url/users',
         user.toJson(),
-      headers: {
-        'Content-Type' : 'application/json',
-        'Authorization' : user.sessionToken ?? ''
-      }
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': user.sessionToken ?? ''
+        }
     );
+    
 
     if(response.body == null) {
       Get.snackbar("Error", "No se pudo actualizar la información");

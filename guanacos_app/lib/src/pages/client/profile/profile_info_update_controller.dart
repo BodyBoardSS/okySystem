@@ -62,6 +62,7 @@ class ProfileUpdateController extends GetxController{
           stream.listen((res) {
             progressDialog.close();
             ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+            
             if(responseApi.success == true){
                 GetStorage().write('user',responseApi.data);
                 Get.snackbar('Exito', responseApi.message ?? '');

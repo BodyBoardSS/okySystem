@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
 import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
+import 'package:gunanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_controller.dart';
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
@@ -14,6 +15,7 @@ class RestaurantHomePage extends StatelessWidget {
 
   final screens = [
     RestaurantOrdersListPage(),
+    const CategoryCreatePage(),
     DeliveryOrdersListPage(),
     ProfileInfoPage()
   ];
@@ -44,13 +46,19 @@ class RestaurantHomePage extends StatelessWidget {
         items: [
           BottomNavyBarItem(
               icon:const Icon(Icons.apps),
-              title: const Text('Inicio'),
+              title: const Text('Pedidos'),
+              activeColor: Colors.white,
+              inactiveColor: Colors.amber
+          ),
+           BottomNavyBarItem(
+              icon:const Icon(Icons.category),
+              title:const Text('Categorias'),
               activeColor: Colors.white,
               inactiveColor: Colors.amber
           ),
           BottomNavyBarItem(
-              icon:const Icon(Icons.list),
-              title:const Text('Pedidos'),
+              icon:const Icon(Icons.restaurant),
+              title:const Text('Productos'),
               activeColor: Colors.white,
               inactiveColor: Colors.amber
           ),

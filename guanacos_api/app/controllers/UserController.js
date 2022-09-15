@@ -21,10 +21,11 @@ module.exports = {
 
         }
 
+        let image = '';
+        const files = req.files;
 
         if (files)
             if (files.length > 0) {
-                console.log(`files.length: ${files.length}`)
                 const path = `image_${Date.now()}`;
                 const url = await storage(files[0], path)
                 if (url != undefined && url != null)

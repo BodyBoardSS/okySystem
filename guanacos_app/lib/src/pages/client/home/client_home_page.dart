@@ -5,7 +5,6 @@ import 'package:gunanacos_app/src/pages/client/products/list/client_products_lis
 
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
 import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
-import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
 
 // ignore: must_be_immutable

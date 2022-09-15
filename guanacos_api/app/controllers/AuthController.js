@@ -46,7 +46,7 @@ module.exports = {
                             phone: user.phone,
                             image: user.image,
                             roles : user.roles,
-                            session_token: token
+                            session_token: `JWT ${token}`
                         }
 
                         res.status(201).json({
@@ -98,7 +98,7 @@ module.exports = {
                 email: user.email,
                 phone: user.phone,
                 image: user.image,
-                session_token: token
+                session_token: `JWT ${token}`
             }
 
             res.status(201).json({
@@ -182,7 +182,7 @@ module.exports = {
                     email: user.email,
                     phone: user.phone,
                     image: user.image,
-                    session_token: token
+                    session_token: `JWT ${token}`
                 }
     
                 res.status(201).json({

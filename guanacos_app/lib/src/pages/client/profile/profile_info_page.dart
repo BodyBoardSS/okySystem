@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_controller.dart';
 import 'package:gunanacos_app/src/pages/home/home_controller.dart';
-import 'package:gunanacos_app/src/widgets/background_app.dart';
+import 'package:gunanacos_app/src/widgets/background_profile.dart';
 
 // ignore: must_be_immutable
 class ProfileInfoPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProfileInfoPage extends StatelessWidget {
     return Scaffold(
       body: Obx(() => Stack(
         children: [
-          const BackgroundApp(),
+          const BackgroundProfile(),
           _imageUser(context),
           _options(context)
         ],
