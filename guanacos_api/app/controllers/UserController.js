@@ -59,7 +59,7 @@ module.exports = {
 
                 res.status(201).json({
                     success: true,
-                    message: 'El usuario fue autenticado.',
+                    message: 'El usuario fue modificado.',
                     data: data
                 })
             })
@@ -111,7 +111,7 @@ module.exports = {
 
                 res.status(201).json({
                     success: true,
-                    message: 'El usuario fue autenticado.',
+                    message: 'El usuario fue modificado.',
                     data: data
                 })
             })

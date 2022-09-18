@@ -6,6 +6,7 @@ import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_lis
 import 'package:gunanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_controller.dart';
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
+import 'package:gunanacos_app/src/pages/restaurant/products/create/product_create_page.dart';
 import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
 
 // ignore: must_be_immutable
@@ -16,7 +17,7 @@ class RestaurantHomePage extends StatelessWidget {
   final screens = [
     RestaurantOrdersListPage(),
     const CategoryCreatePage(),
-    DeliveryOrdersListPage(),
+    ProductCreatePage(),
     ProfileInfoPage()
   ];
 

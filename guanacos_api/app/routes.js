@@ -37,17 +37,17 @@ router.put('/api/users', auth, UserController.update)
 
 
 //Categories
-router.get('/api/category', auth, CategoryController.index)
-router.get('/api/category/:id', auth, CategoryController.find, CategoryController.update)
-router.post('/api/category', auth, GlobalPolicy.isAdmin, CategoryController.create)
-router.put('/api/category/:id', auth, GlobalPolicy.isAdmin, CategoryController.find, CategoryController.update)
-router.delete('/api/category/:id', auth, GlobalPolicy.isAdmin, CategoryController.find, CategoryController.delete)
+router.get('/api/categories', auth, CategoryController.index)
+router.get('/api/categories/:id', auth, CategoryController.find, CategoryController.update)
+router.post('/api/categories', auth, GlobalPolicy.isAdmin, CategoryController.create)
+router.put('/api/categories', auth, GlobalPolicy.isAdmin, CategoryController.find, CategoryController.update)
+router.delete('/api/categories', auth, GlobalPolicy.isAdmin, CategoryController.find, CategoryController.delete)
 
 //Product
-router.get('/api/product', auth, ProductController.index)
-router.post('/api/product', auth, GlobalPolicy.isAdmin, ProductController.create)
-router.put('/api/product/:id', auth, GlobalPolicy.isAdmin, ProductController.update)
-router.delete('/api/product/:id', auth, GlobalPolicy.isAdmin, ProductController.delete)
+router.get('/api/products', auth, ProductController.index)
+router.post('/api/products', auth, upload.array('image',3), GlobalPolicy.isAdmin, ProductController.create)
+router.put('/api/products', auth, GlobalPolicy.isAdmin, ProductController.update)
+router.delete('/api/products', auth, GlobalPolicy.isAdmin, ProductController.delete)
 
 //Method
 router.get('/api/method', auth, PaymentMethodController.index)

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   },{
-    tableName: "categories",freezeTableName: true
+    tableName: "categories",timestamps: false,freezeTableName: true
   });
 
   Category.associate = function(models) {

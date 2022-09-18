@@ -44,7 +44,7 @@ class ClientHomePage extends StatelessWidget {
         items: [
           BottomNavyBarItem(
               icon:const Icon(Icons.apps),
-              title: const Text('Inicio'),
+              title: const Text('Productos'),
               activeColor: Colors.white,
               inactiveColor: Colors.amber
           ),

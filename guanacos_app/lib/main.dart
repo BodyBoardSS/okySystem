@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.amber,
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
-          primary: Colors.amber,
+          primary: Color(0xffA47E3B),
           onPrimary: Colors.grey,
           secondary: Colors.amberAccent,
           onSecondary: Colors.grey,

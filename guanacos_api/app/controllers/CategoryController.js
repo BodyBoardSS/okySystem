@@ -11,13 +11,7 @@ module.exports = {
         }
     },
     async index(req, res) {
-        let categories = await Category.findAll({
-            include: {
-                model: Product,
-                as: "products",
-                attributes: ['name', 'price', 'description']
-            }
-        })
+        let categories = await Category.findAll()
         res.json(categories)
     },
 
@@ -31,13 +25,22 @@ module.exports = {
 
     create(req, res) {
         Category.create({
-            name: req.body.name
+            name: req.body.name,
+            description : req.body.description
         }).then(category => {
-            res.json(category);
-            console.log(`Project with id = ${category.name} created successfully!`);
+            console.log(`Category with id = ${category.name} created successfully!`);
+            res.status(201).json({
+                success: true,
+                message: 'La categoría fue creada con éxito.',
+                data: category
+            })
         }).catch(function (err) {
             console.log(`Error = ${err}`);
-            res.status(500).json({ error: "El registro no pudo ser creado." });
+            res.status(500).json({
+                success: true,
+                message: 'El registro no pudo ser creado.',
+                data:[]
+            })
         });
     },
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gunanacos_app/src/pages/restaurant/categories/create/form_create.dart';
 import 'package:gunanacos_app/src/widgets/background_app.dart';
 
 class CategoryCreatePage extends StatelessWidget {
@@ -11,7 +12,7 @@ class CategoryCreatePage extends StatelessWidget {
         children: [
           const BackgroundApp(),
           _textTitle(),
-          const Center(child: Text('CategoryCreatePage'))
+          FormCreate()
         ] 
       ),
     );

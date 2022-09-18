@@ -61,12 +61,10 @@ class UserProvider extends GetConnect {
 
     request.fields['user'] = json.encode(user);
     final response = await request.send();
-    print(response.toString());
     return response.stream.transform(utf8.decoder);
   }
 
   Future<ResponseApi> login(String email, String password) async{
-    print('Email: ${email}, Pass: ${password}');
     Response response = await post(
       '$url/signin',
         {
@@ -79,7 +77,6 @@ class UserProvider extends GetConnect {
     );
 
     if(response.body == null) {
-      print('statusCode: ${response.statusCode}');
       Get.snackbar("Error", "No se pudo ejecutar la petición");
       return ResponseApi();
     }

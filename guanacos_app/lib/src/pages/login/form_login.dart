@@ -80,7 +80,7 @@ class FormLogin extends StatelessWidget {
           child: const Text(
             'Ingresar',
             style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
           )),
     );
   }

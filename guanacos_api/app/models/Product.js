@@ -5,9 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     name: {type: DataTypes.STRING,field:'NAME'},
     price: {type: DataTypes.DECIMAL,field:'PRICE'},
     description: {type: DataTypes.STRING,field:'DESCRIPTION'},
-    image: {type: DataTypes.STRING,field:'IMAGE'}
+    image1: {type: DataTypes.STRING,field:'IMAGE1'},
+    image2: {type: DataTypes.STRING,field:'IMAGE2'},
+    image3: {type: DataTypes.STRING,field:'IMAGE3'}
   },{
-    tableName: "products", timestamps: false,freezeTableName: true, createdAt:false,updatedAt:false
+    tableName: "products",freezeTableName: true
   });
 
   Product.associate = function(models) {
