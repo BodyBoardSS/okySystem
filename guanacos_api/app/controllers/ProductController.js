@@ -13,6 +13,14 @@ module.exports = {
         })
         res.json(products)
     },
+    async findByCategory(req, res) {
+        let products = await Product.findAll({
+            where:{
+                categoryid:req.body.id_category
+            }
+        })
+        res.json(products)
+    },
 
     async create(req, res) {
         const product = JSON.parse(req.body.product);

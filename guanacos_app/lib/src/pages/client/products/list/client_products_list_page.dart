@@ -13,29 +13,30 @@ class ClientProductsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: clientController.categories.length,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize:const Size.fromHeight(50),
-          child: AppBar(
-            bottom: TabBar(
-              isScrollable: true,
-              indicatorColor: Colors.amber,
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey[400],
-              tabs: List<Widget>.generate(
-                clientController.categories.length, 
-                (index) {
-                  return Tab(
-                    child: Text(clientController.categories[index].name ?? ''),
-                  );
-                }),
-            ),
+    return Obx(() => DefaultTabController(
+        length: clientController.categories.length,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize:const Size.fromHeight(50),
+            child: AppBar(
+                bottom: TabBar(
+                  isScrollable: true,
+                  indicatorColor: Colors.amber,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.grey[400],
+                  tabs:List<Widget>.generate(
+                    clientController.categories.length, 
+                    (index) {
+                      return Tab(
+                        child: Text(clientController.categories[index].name ?? ''),
+                      );
+                    }),
+                ),
+              ),
           ),
+          body: _tabBarView(),
         ),
-        body: _tabBarView(),
-      ),
+      )
     );
   }
 
