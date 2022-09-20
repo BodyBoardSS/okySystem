@@ -38,7 +38,7 @@ class CategoriesProvider extends GetConnect{
       Get.snackbar('Petición denegada', 'Privilegios insuficientes');
       return [];
     }
-
+    print(response.body);
     List<Category> categories = Category.fromJsonList(response.body);
 
     return categories;

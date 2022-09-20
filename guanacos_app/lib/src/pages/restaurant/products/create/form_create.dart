@@ -149,7 +149,7 @@ class FormCreate extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: productCreateController.priceController,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.number,
         decoration: const InputDecoration(
             hintText: 'Precio', prefixIcon: Icon(Icons.attach_money)),
       ),

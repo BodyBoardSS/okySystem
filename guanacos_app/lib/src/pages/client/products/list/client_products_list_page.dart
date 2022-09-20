@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gunanacos_app/src/models/category.dart';
+import 'package:gunanacos_app/src/models/product.dart';
 
 import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
 
@@ -34,18 +35,46 @@ class ClientProductsListPage extends StatelessWidget {
                 ),
               ),
           ),
-          body: _tabBarView(),
+          body: _tabBarView(context),
         ),
       )
     );
   }
 
-  TabBarView _tabBarView() {
+  TabBarView _tabBarView(BuildContext context) {
     return TabBarView(
         children: clientController.categories.map((Category category){
-          return Container();
+          return FutureBuilder(
+            future:clientController.getProduct(category.id ?? 2),
+            builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+              if(snapshot.hasData){
+                return ListView.builder(
+                  itemCount: snapshot.data?.length ?? 0,
+                  itemBuilder: (_,index){
+                    return _cardProduct(snapshot.data![index]);
+                  }
+                );
+              }else{
+                return Container();
+              }
+            }
+          );
         }).toList(),
       );
+  }
+
+  Widget _cardProduct(Product product){
+    return ListTile(
+      title: Text(product.name ?? ''),
+      subtitle: Text(product.description ?? ''),
+      leading: FadeInImage(
+        placeholder: const AssetImage('assets/img/no-image.png'), 
+        image: product.image1 != null ? NetworkImage(product.image1!) 
+        : const AssetImage('assets/img/no-image.png') as ImageProvider,
+        fit: BoxFit.contain,
+        fadeInDuration: const Duration(milliseconds: 50),
+      ),
+    );
   }
 
 }

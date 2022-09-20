@@ -14,9 +14,10 @@ module.exports = {
         res.json(products)
     },
     async findByCategory(req, res) {
+        const { categoryId } = req.params;
         let products = await Product.findAll({
             where:{
-                categoryid:req.body.id_category
+                categoryid:categoryId
             }
         })
         res.json(products)

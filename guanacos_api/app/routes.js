@@ -45,7 +45,7 @@ router.delete('/api/categories', auth, GlobalPolicy.isAdmin, CategoryController.
 
 //Product
 router.get('/api/products', auth, ProductController.index)
-router.get('/api/products/category', auth, ProductController.findByCategory)
+router.get('/api/products/:categoryId', auth, ProductController.findByCategory)
 router.post('/api/products', auth, upload.array('image',3), GlobalPolicy.isAdmin, ProductController.create)
 router.put('/api/products', auth, GlobalPolicy.isAdmin, ProductController.update)
 router.delete('/api/products', auth, GlobalPolicy.isAdmin, ProductController.delete)

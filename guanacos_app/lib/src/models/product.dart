@@ -45,6 +45,16 @@ class Product {
         quantity: json["quantity"],
     );
 
+    static List<Product> fromJsonList(List<dynamic> jsonList){
+      List<Product> list = [];
+      jsonList.forEach((item) {
+        Product product = Product.fromJson(item);
+        list.add(product);
+      });
+
+      return list;
+    }
+
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,

@@ -14,6 +14,8 @@ class ProductsProvider extends GetConnect{
 
   User user = User.fromJson(GetStorage().read('user') ?? {});
 
+  String url = "${Environment.apiUrl}api";
+
   Future<Stream> create(Product product, List<File> images) async{
     Uri uri = Uri.http(Environment.apiUrlOld, '/api/products');
 
@@ -37,5 +39,24 @@ class ProductsProvider extends GetConnect{
     final response = await request.send();
 
     return response.stream.transform(utf8.decoder);
+  }
+
+   Future<List<Product>> findByCategory(int idCategorysync) async {
+    Response response = await get(
+      '$url/products/$idCategorysync',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
+      }
+    );
+
+    if(response.statusCode == 401){
+      Get.snackbar('Petición denegada', 'Privilegios insuficientes');
+      return [];
+    }
+
+    List<Product> products = Product.fromJsonList(response.body);
+
+    return products;
   }
 }
