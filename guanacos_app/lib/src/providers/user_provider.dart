@@ -61,6 +61,7 @@ class UserProvider extends GetConnect {
 
     request.fields['user'] = json.encode(user);
     final response = await request.send();
+    
     return response.stream.transform(utf8.decoder);
   }
 
@@ -76,8 +77,8 @@ class UserProvider extends GetConnect {
       }
     );
 
-    if(response.body == null) {
-      Get.snackbar("Error", "No se pudo ejecutar la petición");
+    if(response.statusCode == 500) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas, favor vuelva a intentarlo mas tarde.");
       return ResponseApi();
     }
 
@@ -102,8 +103,8 @@ class UserProvider extends GetConnect {
     );
     
 
-    if(response.body == null) {
-      Get.snackbar("Error", "No se pudo actualizar la información");
+    if(response.statusCode == 500) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas, favor vuelva a intentarlo mas tarde.");
       return ResponseApi();
     }
 

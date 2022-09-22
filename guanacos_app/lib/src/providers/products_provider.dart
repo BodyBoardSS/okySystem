@@ -50,6 +50,11 @@ class ProductsProvider extends GetConnect{
       }
     );
 
+     if(response.statusCode == 500) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
+      return [];
+    }
+
     if(response.statusCode == 401){
       Get.snackbar('Petición denegada', 'Privilegios insuficientes');
       return [];

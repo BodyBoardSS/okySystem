@@ -30,8 +30,6 @@ module.exports = {
                 const url = await storage(files[0], path)
                 if (url != undefined && url != null)
                     image = url
-
-                console.log(`Image: ${image}`)
             }
 
         User.update({

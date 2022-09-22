@@ -11,7 +11,11 @@ module.exports = {
     signIn(req, res) {
 
         if(!req.body.email || !req.body.password){
-            res.status(401).json("Faltan campos requeridos")
+            res.status(401).json({
+                success: false,
+                message: 'El usuario no fue encontrado',
+                data: null
+            })
             return
         }
         
@@ -107,7 +111,11 @@ module.exports = {
                 data: data
             })
         }).catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         })
     },
 

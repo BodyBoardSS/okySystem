@@ -45,9 +45,12 @@ module.exports = {
                 }
             }
             res.json(product);
-            console.log(`Project with id = ${product.name} created successfully!`);
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser creado." });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         });
     },
 
@@ -65,9 +68,12 @@ module.exports = {
             }
         ).then(function () {
             res.json({ message: "Updated successfully" });
-            console.log(`Project with id = ${id} updated successfully!`);
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser actualizado." + err });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         });
     },
 
@@ -79,9 +85,12 @@ module.exports = {
             }
         }).then(function () {
             res.json({ message: "Deleted successfully" });
-            console.log(`Project with id = ${id} deleted successfully!`);
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser eliminado." });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         })
     }
 }

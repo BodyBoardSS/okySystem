@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_controller.dart';
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
@@ -17,7 +16,7 @@ class RestaurantHomePage extends StatelessWidget {
   final screens = [
     RestaurantOrdersListPage(),
     const CategoryCreatePage(),
-    ProductCreatePage(),
+    const ProductCreatePage(),
     ProfileInfoPage()
   ];
 

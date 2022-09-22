@@ -4,7 +4,11 @@ module.exports = {
     async find(req, res, next) {
         let category = await Category.findByPk(req.params.id);
         if (!category)
-            res.status(404).json({ msg: "La categoria no existe" })
+            res.status(404).json({
+                success: false,
+                message: "La categoria no existe",
+                data: []
+            });
         else {
             req.category = category;
             next();
@@ -18,7 +22,11 @@ module.exports = {
     async show(req, res) {
         let category = await Category.findByPk(req.params.id);
         if (!category)
-            res.status(404).json({ msg: "La categoria no existe" })
+            res.status(404).json({
+                success: false,
+                message: "La categoria no existe",
+                data: []
+            });
         else
             res.json(category)
     },
@@ -51,7 +59,11 @@ module.exports = {
             res.json(category);
             console.log(`Project with id = ${id} updated successfully!`);
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser actualizado." + err });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         });
     },
 
@@ -60,7 +72,11 @@ module.exports = {
             res.json({ message: "Deleted successfully" });
             console.log(`Project with id = ${id} deleted successfully!`);
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser eliminado." });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         })
     }
 }

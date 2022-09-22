@@ -10,12 +10,15 @@ module.exports = {
         PaymentMethod.create({
             name     : req.body.name
         }).then(method => {
-            console.log(`Project with id = ${method.name} created successfully!`);
             PaymentMethod.findAll().then(methods => {
                 res.json(methods);
             });
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser creado." });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         });
     },
 
@@ -28,12 +31,15 @@ module.exports = {
                 where: { id: id }
             }
         ).then(function () {
-            console.log(`Project with id = ${id} updated successfully!`);
             PaymentMethod.findAll().then(methods => {
                 res.json(methods);
             });
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser actualizado."+ err});
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         });
     },
 
@@ -44,12 +50,15 @@ module.exports = {
                 id: id
             }
         }).then(function () {
-            console.log(`Project with id = ${id} deleted successfully!`);
             PaymentMethod.findAll().then(methods => {
                 res.json(methods);
             });
         }).catch(function (err) {
-            res.status(500).json({ error: "El registro no pudo ser eliminado." });
+            res.status(500).json({
+                success: false,
+                message: err,
+                data: []
+            });
         })
     }
 }
