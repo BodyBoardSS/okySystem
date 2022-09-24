@@ -91,12 +91,12 @@ class FormCreate extends StatelessWidget {
 
   List<DropdownMenuItem<int>> _dropDownItems(List<Category> categories) {
     List<DropdownMenuItem<int>> list = [];
-    categories.forEach((category) {
+    for (var category in categories) {
       list.add(DropdownMenuItem(
           value: category.id,
           child: Text(category.name ?? ''),
       ));
-    });
+    }
 
     return list;
   }

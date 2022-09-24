@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:gunanacos_app/src/models/category.dart';
 import 'package:gunanacos_app/src/models/product.dart';
+import 'package:gunanacos_app/src/pages/client/products/detail/client_detail_page.dart';
 import 'package:gunanacos_app/src/providers/categories_provider.dart';
 import 'package:gunanacos_app/src/providers/products_provider.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ClientProductsListController extends GetxController{
   CategoriesProvider categoriesProvider = CategoriesProvider();
@@ -22,5 +25,12 @@ class ClientProductsListController extends GetxController{
 
   Future<List<Product>> getProduct(int categoryId) async{
     return await productsProvider.findByCategory(categoryId);
+  }
+
+  void openModelBottomSheet(BuildContext context, Product product){
+    showMaterialModalBottomSheet(
+      context: context, 
+      builder: (context) => ClientProductsDetailPage()
+    );
   }
 }

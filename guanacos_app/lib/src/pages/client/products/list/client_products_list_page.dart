@@ -4,6 +4,7 @@ import 'package:gunanacos_app/src/models/category.dart';
 import 'package:gunanacos_app/src/models/product.dart';
 
 import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
+import 'package:gunanacos_app/src/widgets/no_data_widget.dart';
 
 // ignore: must_be_immutable
 class ClientProductsListPage extends StatelessWidget {
@@ -47,15 +48,15 @@ class ClientProductsListPage extends StatelessWidget {
           return FutureBuilder(
             future:clientController.getProduct(category.id ?? 2),
             builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-              if(snapshot.hasData){
+              if(snapshot.hasData && snapshot.data!.isNotEmpty){
                 return ListView.builder(
                   itemCount: snapshot.data?.length ?? 0,
                   itemBuilder: (_,index){
-                    return _cardProduct(snapshot.data![index]);
+                    return _cardProduct(context,snapshot.data![index]);
                   }
                 );
               }else{
-                return Container();
+                return NoDataWidget(text:'No hay productos');
               }
             }
           );
@@ -63,16 +64,51 @@ class ClientProductsListPage extends StatelessWidget {
       );
   }
 
-  Widget _cardProduct(Product product){
-    return ListTile(
-      title: Text(product.name ?? ''),
-      subtitle: Text(product.description ?? ''),
-      leading: FadeInImage(
-        placeholder: const AssetImage('assets/img/no-image.png'), 
-        image: product.image1 != null ? NetworkImage(product.image1!) 
-        : const AssetImage('assets/img/no-image.png') as ImageProvider,
-        fit: BoxFit.contain,
-        fadeInDuration: const Duration(milliseconds: 50),
+  Widget _cardProduct(BuildContext context,Product product){
+    return GestureDetector(
+      onTap: () => clientController.openModelBottomSheet(context, product),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+            child: ListTile(
+              title: Text(product.name ?? ''),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 5),
+                  Text(product.description ?? '',
+                    maxLines:2 ,
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const SizedBox(height: 10),
+                  Text('\$ ${product.price}',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+              trailing: SizedBox(
+                height: 70,
+                width: 60,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: FadeInImage(
+                    placeholder: const AssetImage('assets/img/no-image.png'), 
+                    image: product.image1 != null ? NetworkImage(product.image1!) 
+                    : const AssetImage('assets/img/no-image.png') as ImageProvider,
+                    fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 50),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Divider(height: 1,color: Colors.grey,indent: 37, endIndent: 37,)
+        ],
       ),
     );
   }

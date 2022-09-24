@@ -47,10 +47,10 @@ class Product {
 
     static List<Product> fromJsonList(List<dynamic> jsonList){
       List<Product> list = [];
-      jsonList.forEach((item) {
+      for (var item in jsonList) {
         Product product = Product.fromJson(item);
         list.add(product);
-      });
+      }
 
       return list;
     }
