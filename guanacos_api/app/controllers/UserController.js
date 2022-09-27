@@ -1,9 +1,5 @@
-const { User, UserRol, Rol } = require('../models/index')
-const bcryp = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const authConfig = require('../../config/auth')
+const { User, Rol } = require('../models/index')
 const storage = require('../ultils/cloud_storage')
-const { Op } = require("sequelize");
 
 module.exports = {
 
@@ -85,7 +81,7 @@ module.exports = {
 
         }
 
-        User.update({
+        await User.update({
             name: userReq.name,
             lastName: userReq.lastName,
             phone: userReq.phone
@@ -93,7 +89,7 @@ module.exports = {
         {
             where: { id: userReq.id }
         }).then(async myUser => {
-            User.findByPk(userReq.id, {
+            await User.findByPk(userReq.id, {
                 include: {model:Rol ,as:"roles", attributes:['id','rol','image','route']}
             }).then( user => {
                 const data = {

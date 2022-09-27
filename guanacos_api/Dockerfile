@@ -20,9 +20,8 @@ ENV DB_DATABASE=guanaco_bd
 ENV DB_HOST=localhost
 ENV DB_DIALECT=mysql
 
-ADD BaltimoreCyberTrustRoot.crt.pem /usr/local/share/ca-certificates/BaltimoreCyberTrustRoot.crt.pem
-RUN chmod 644 /usr/local/share/ca-certificates/BaltimoreCyberTrustRoot.crt.pem && update-ca-certificates
-
-ENV CA_AZURE=/usr/local/share/ca-certificates/BaltimoreCyberTrustRoot.crt.pem
+#ADD BaltimoreCyberTrustRoot.crt.pem /usr/local/share/ca-certificates/BaltimoreCyberTrustRoot.crt.pem
+#RUN chmod 644 /usr/local/share/ca-certificates/BaltimoreCyberTrustRoot.crt.pem && update-ca-certificates
+#ENV CA_AZURE=/usr/local/share/ca-certificates/BaltimoreCyberTrustRoot.crt.pem
 
 CMD ["npm","start"]

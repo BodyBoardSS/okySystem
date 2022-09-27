@@ -4,11 +4,11 @@
   "description": "API-Rest que proporciona el acceso hacia la capa de datos.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app/server.js",
-    "start": "node app/server.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [],
-  "author": "Kevin Orellana (BodyBoardSS)",
+  "author": "OKYSytems (UTEC)",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^6.4.1",

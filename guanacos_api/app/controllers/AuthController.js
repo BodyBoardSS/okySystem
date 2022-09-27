@@ -8,7 +8,7 @@ const { Op } = require("sequelize");
 module.exports = {
 
     //Login
-    signIn(req, res) {
+    async signIn(req, res) {
 
         if(!req.body.email || !req.body.password){
             res.status(401).json({
@@ -21,7 +21,7 @@ module.exports = {
         
         let { email, password } = req.body;
 
-        User.findOne({
+        await User.findOne({
             where: {
                 email: email
             }
@@ -78,11 +78,11 @@ module.exports = {
     },
 
     //Registro
-    signUp(req, res) {
+    async signUp(req, res) {
         let password = bcryp.hashSync(req.body.password, Number.parseInt(authConfig.rounds))
 
         //Crear usuario
-        User.create({
+        await User.create({
             name: req.body.name,
             email: req.body.email,
             lastName: req.body.lastName,

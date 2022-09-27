@@ -3,28 +3,46 @@ const app = express();
 const { sequelize } = require('./models/index')
 const cors = require('cors');
 
-//Settings
-const PORT = process.env.PORT || 3001;
+class Server{
+  constructor(){
+    this.app = express()
 
-app.use(cors());
+    //Settings
+    this.PORT = process.env.PORT || 3001
 
-//Middlewares
-// For parsing application/json
-app.use(express.json())
-app.disable('x-powered-by');
-// For parsing application/x-www-form-urlencoded
-app.use(express.urlencoded({extended: true}))
+    //Middlewares
+    this.middlewares()
 
-//Routes
-app.use(require('./routes'))
+    //rutas de ingreso al server
+    this.routes()
+  }
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
+  middlewares(){
+      this.app.use(express.static('public'))
+      this.app.use(cors())
+      this.app.use(express.json()) // For parsing application/json
+      this.app.disable('x-powered-by');
+      this.app.use(express.urlencoded({extended: true})) // For parsing application/x-www-form-urlencoded
+  }
 
-  sequelize.authenticate().then(() => {
-    console.log('Conectado')
-  }).catch(function (err) {
-    console.log(`No conectado: ${err}`)
-    console.log(process.env.DB_PASSWORD)
-  })
-});
+  routes(){
+      this.app.use('/api',require('../routes/authentication'))
+      this.app.use('/api/users',require('../routes/users'))
+      this.app.use('/api/categories',require('../routes/categories'))
+      this.app.use('/api/products',require('../routes/products'))
+  }
+
+  listen(){
+    this.app.listen(this.PORT, () => {
+      console.log(`App listening on port ${this.PORT}`)
+    
+      sequelize.authenticate().then(() => {
+        console.log('Conectado')
+      }).catch(function (err) {
+        console.log(`No conectado: ${err}`)
+      })
+    });
+  }
+}
+
+module.exports = Server;

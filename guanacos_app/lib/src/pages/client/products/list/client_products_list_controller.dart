@@ -30,7 +30,7 @@ class ClientProductsListController extends GetxController{
   void openModelBottomSheet(BuildContext context, Product product){
     showMaterialModalBottomSheet(
       context: context, 
-      builder: (context) => ClientProductsDetailPage()
+      builder: (context) => ClientProductsDetailPage(product: product,)
     );
   }
 }
