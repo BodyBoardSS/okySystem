@@ -11,6 +11,7 @@ class ProfileInfoPage extends StatelessWidget {
 
   ProfileInfoController profileInfoController = Get.put(ProfileInfoController());
   HomeController hController = Get.put(HomeController());
+  
 
 
   @override
@@ -26,6 +27,51 @@ class ProfileInfoPage extends StatelessWidget {
     );
   }
 
+  Widget _option(String opt){
+    if(opt == 'Perfil'){
+      return Column(
+        children: [
+          ListTile(
+            onTap: () => profileInfoController.goToUpdatePage(),
+            title: Text(opt, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+            leading:const Icon(Icons.edit, size: 30),
+            trailing:const Icon(Icons.arrow_forward_ios, size: 30),
+          ),
+          const Divider()
+        ],
+      );
+    }
+
+    if(opt == 'Salir'){
+      return Column(
+        children: [
+          ListTile(
+            title: Text(opt, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
+            leading:const Icon(Icons.logout, size: 30),
+            trailing:const Icon(Icons.arrow_forward_ios, size: 30),
+            onTap: () => hController.logOut(),
+          ),
+          const Divider()
+        ],
+      );
+    }
+    if(opt == 'Roles'){
+      return Column(
+        children: [
+          ListTile(
+            title: Text(opt, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
+            leading:const Icon(Icons.supervised_user_circle, size: 30),
+            trailing:const Icon(Icons.arrow_forward_ios, size: 30),
+            onTap: () => profileInfoController.goToRoles()
+          ),
+          const Divider()
+        ],
+      );
+    }
+
+    return const Text('data');
+  }
+
 
   Widget _options(BuildContext context){
     return Container(
@@ -34,19 +80,8 @@ class ProfileInfoPage extends StatelessWidget {
         child: ListView(
           padding:const EdgeInsets.all(0),
           children: [
-            ListTile(
-              onTap: () => profileInfoController.goToUpdatePage(),
-              title:const Text('Perfil', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-              leading:const Icon(Icons.edit, size: 30),
-              trailing:const Icon(Icons.arrow_forward_ios, size: 30),
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Salir', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
-              leading:const Icon(Icons.logout, size: 30),
-              trailing:const Icon(Icons.arrow_forward_ios, size: 30),
-              onTap: () => hController.logOut(),
-            )
+            ...profileInfoController.options.map(
+                (opt) => _option(opt)).toList(),
           ],
         ),
     );

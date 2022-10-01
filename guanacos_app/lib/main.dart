@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:gunanacos_app/src/models/user.dart';
+import 'package:gunanacos_app/src/pages/client/address/create/client_address_create_page.dart';
+import 'package:gunanacos_app/src/pages/client/address/list/client_address_list_page.dart';
 import 'package:gunanacos_app/src/pages/client/home/client_home_page.dart';
+import 'package:gunanacos_app/src/pages/client/orders/create/client_orders_create_page.dart';
 
 import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
@@ -54,6 +57,9 @@ class _MyAppState extends State<MyApp> {
           GetPage(name: '/client/products/list', page: () => ClientProductsListPage()),
           GetPage(name: '/client/products/info', page: () => ProfileInfoPage()),
           GetPage(name: '/client/profile/update', page: () => ProfileUpdatePage()),
+          GetPage(name: '/client/orders/create', page: () => ClientOrdersCreatePage()),
+          GetPage(name: '/client/address/create', page: () => ClientAddressCreatePage()),
+          GetPage(name: '/client/address/list', page: () => ClientAddressListPage()),
           GetPage(name: '/restaurant/home', page: () => RestaurantHomePage()),
           GetPage(name: '/restaurant/category/create', page: () => const CategoryCreatePage()),
           GetPage(name: '/delivery/orders/list', page: () => DeliveryOrdersListPage()),

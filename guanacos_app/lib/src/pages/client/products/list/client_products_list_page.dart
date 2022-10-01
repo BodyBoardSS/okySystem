@@ -19,8 +19,19 @@ class ClientProductsListPage extends StatelessWidget {
         length: clientController.categories.length,
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize:const Size.fromHeight(50),
+            preferredSize:const Size.fromHeight(110),
             child: AppBar(
+                flexibleSpace: Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  alignment: Alignment.topCenter,
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      _textFieldSearch(context),
+                      _iconShoppingBag(),
+                    ],
+                  ),
+                ),
                 bottom: TabBar(
                   isScrollable: true,
                   indicatorColor: Colors.amber,
@@ -109,6 +120,54 @@ class ClientProductsListPage extends StatelessWidget {
           ),
           const Divider(height: 1,color: Colors.grey,indent: 37, endIndent: 37,)
         ],
+      ),
+    );
+  }
+
+  Widget _iconShoppingBag(){
+    return SafeArea(
+      child: Container(
+        margin: const EdgeInsets.only(left: 10),
+        child: IconButton(
+          onPressed: () => clientController.goToOrderCreate(), 
+          icon: const Icon(
+            Icons.shopping_bag_outlined,
+            size: 30,
+          )
+        ),
+      ),
+    );
+  }
+
+  Widget _textFieldSearch(BuildContext context){
+    return SafeArea(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.7,
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Buscar',
+            suffixIcon: const Icon(Icons.search, color: Colors.grey,),
+            hintStyle: const TextStyle(
+              fontSize: 17,
+              color: Colors.grey
+            ),
+            fillColor: Colors.white,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: const BorderSide(
+                color: Colors.grey
+              )
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: const BorderSide(
+                color: Colors.grey
+              )
+            ),
+            contentPadding: const EdgeInsets.all(15)
+          ),
+        ),
       ),
     );
   }

@@ -19,7 +19,7 @@ module.exports = {
         res.json(categories)
     },
 
-    async show(req, res) {
+    async findById(req, res) {
         let category = await Category.findByPk(req.params.id);
         if (!category)
             res.status(404).json({
@@ -36,7 +36,6 @@ module.exports = {
             name: req.body.name,
             description : req.body.description
         }).then(category => {
-            console.log(`Category with id = ${category.name} created successfully!`);
             res.status(201).json({
                 success: true,
                 message: 'La categoría fue creada con éxito.',

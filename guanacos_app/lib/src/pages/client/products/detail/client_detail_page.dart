@@ -7,16 +7,22 @@ import 'package:gunanacos_app/src/pages/client/products/detail/client_products_d
 // ignore: must_be_immutable
 class ClientProductsDetailPage extends StatelessWidget {
   Product? product;
-  ClientProductsDetailController clientProductsDetailController =
-      Get.put(ClientProductsDetailController());
+  late ClientProductsDetailController clientProductsDetailController;
 
-  ClientProductsDetailPage({Key? key, @required this.product})
-      : super(key: key);
+  var counter = 0.obs;
+  var price = 0.0.obs;
+
+  ClientProductsDetailPage({@required this.product}){
+    clientProductsDetailController = Get.put(ClientProductsDetailController());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Container(
+
+    clientProductsDetailController.checkProductsAdded(product!, price, counter);
+
+    return Obx(() => Scaffold(
+      bottomNavigationBar: SizedBox(
         height: 100,
         child: _buttonAddToBag(),
       ),
@@ -28,7 +34,7 @@ class ClientProductsDetailPage extends StatelessWidget {
           _productPrice()
         ],
       ),
-    );
+    ));
   }
 
   Widget _productName() {
@@ -80,9 +86,10 @@ class ClientProductsDetailPage extends StatelessWidget {
           child: Row(
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => clientProductsDetailController.removeItem(product!, price, counter),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.white,
+                    minimumSize: const Size(45,37),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(25),
@@ -96,17 +103,18 @@ class ClientProductsDetailPage extends StatelessWidget {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
-                  minimumSize: const Size(40, 37)
+                  minimumSize: const Size(45,37),
                 ),
-                child: const Text(
-                  '0',
-                  style: TextStyle(color: Colors.black, fontSize: 22),
+                child: Text(
+                  '${counter.value}',
+                  style: const TextStyle(color: Colors.black, fontSize: 22),
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => clientProductsDetailController.addItem(product!, price, counter),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.white,
+                    minimumSize: const Size(45,37),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(25),
@@ -118,15 +126,16 @@ class ClientProductsDetailPage extends StatelessWidget {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => clientProductsDetailController.addToBag(product!, price, counter),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.amber,
+                    minimumSize: const Size(45,37),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)
                       )
                     ),
                 child: Text(
-                  'Agregar   \$${product?.price.toString() ??''}',
+                  'Agregar   \$${price.value}',
                   style: const TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),
@@ -138,10 +147,7 @@ class ClientProductsDetailPage extends StatelessWidget {
   }
 
   Widget _imageSlideShow(BuildContext context) {
-    return SafeArea(
-        child: Stack(
-      children: [
-        ImageSlideshow(
+    return  ImageSlideshow(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.4,
             initialPage: 0,
@@ -172,8 +178,6 @@ class ClientProductsDetailPage extends StatelessWidget {
                       ? NetworkImage(product!.image3!)
                       : const AssetImage('assets/img/no-image.png')
                           as ImageProvider),
-            ])
-      ],
-    ));
+            ]);
   }
 }
