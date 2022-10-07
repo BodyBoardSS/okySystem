@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
 import 'package:gunanacos_app/src/pages/delivery/home/delivery_home_controller.dart';
 import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
-import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
 
 // ignore: must_be_immutable
@@ -14,7 +13,6 @@ class DeliveryHomePage extends StatelessWidget {
 
   final screens = [
     DeliveryOrdersListPage(),
-    RestaurantOrdersListPage(),
     ProfileInfoPage()
   ];
 
@@ -42,12 +40,6 @@ class DeliveryHomePage extends StatelessWidget {
         selectedIndex: deliveryController.indexTab.value,
         onItemSelected: (index) => deliveryController.changeTab(index),
         items: [
-          BottomNavyBarItem(
-              icon:const Icon(Icons.apps),
-              title: const Text('Inicio'),
-              activeColor: Colors.white,
-              inactiveColor: Colors.amber
-          ),
           BottomNavyBarItem(
               icon:const Icon(Icons.list),
               title:const Text('Pedidos'),

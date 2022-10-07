@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -58,6 +59,7 @@ class ClientAddressMapController extends GetxController {
     return await Geolocator.getCurrentPosition();
   }
 
+  // ignore: prefer_void_to_null
   Future<Null> setLocationDraggableInfo() async{
     double lat = initialPosition.target.latitude;
     double lng = initialPosition.target.longitude;
@@ -69,7 +71,7 @@ class ClientAddressMapController extends GetxController {
       String street = address[0].subThoroughfare ?? '';
       String city = address[0].locality ?? '';
       String departament = address[0].administrativeArea ?? '';
-      String country = address[0].country ?? '';
+      //String country = address[0].country ?? '';
 
       addressName.value = '$direction #$street, $city, $departament';
       addresLatLng = LatLng(lat, lng);
@@ -95,7 +97,9 @@ class ClientAddressMapController extends GetxController {
       position = await Geolocator.getLastKnownPosition();
       animateCameraPosition(position?.latitude ?? 13.6817911, position?.longitude ?? -89.1922692);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 

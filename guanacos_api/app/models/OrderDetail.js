@@ -2,17 +2,10 @@
 
 module.exports = (sequelize, DataTypes) => {
   const OrderDetail = sequelize.define('OrderDetail',{
-    quantity: {type: DataTypes.DOUBLE,field:'QUANTITY'},
-    price: {type: DataTypes.DOUBLE,field:'PRICE'},
-    discount: {type: DataTypes.DOUBLE,field:'DISCOUNT'}
+    quantity: {type: DataTypes.DOUBLE,field:'QUANTITY'}
   },{
-    tableName: "order_detail", timestamps: false,freezeTableName: true, createdAt:false,updatedAt:false
+    tableName: "order_detail", timestamps: false
   });
-
-  OrderDetail.associate = function(models) {
-    OrderDetail.belongsTo(models.Product,{as: "product", foreignKey: "idproduct"});
-    OrderDetail.belongsTo(models.Order,{as: "order", foreignKey: "idorder"});
-  }
   
   return OrderDetail;
 };

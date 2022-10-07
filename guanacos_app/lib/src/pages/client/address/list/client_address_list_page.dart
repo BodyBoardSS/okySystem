@@ -4,6 +4,7 @@ import 'package:gunanacos_app/src/models/address.dart';
 import 'package:gunanacos_app/src/pages/client/address/list/client_address_list_controller.dart';
 import 'package:gunanacos_app/src/widgets/no_data_widget.dart';
 
+// ignore: must_be_immutable
 class ClientAddressListPage extends StatelessWidget {
   ClientAddressListPage({Key? key}) : super(key: key);
 
@@ -13,6 +14,7 @@ class ClientAddressListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: _buttonNext(context),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         title:const Text(
@@ -130,4 +132,22 @@ class ClientAddressListPage extends StatelessWidget {
       ),
     );
   }
+
+   Widget _buttonNext(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 50,
+      margin:const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      child: ElevatedButton(
+          onPressed: () => addressController.createOrder(),
+          style: ElevatedButton.styleFrom(
+              padding:const EdgeInsets.symmetric(vertical: 15)),
+          child:const Text(
+            'Continuar',
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
+          )),
+    );
+  }
+
 }

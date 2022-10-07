@@ -111,4 +111,28 @@ class UserProvider extends GetConnect {
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
     return responseApi;
   }
+
+    Future<List<User>> getAllByRolName(String rolName) async {
+    Response response = await get(
+      '$url/users/$rolName',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
+      }
+    );
+
+    if(response.statusCode == 500) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
+      return [];
+    }
+
+    if(response.statusCode == 401){
+      Get.snackbar('Petición denegada', 'Privilegios insuficientes');
+      return [];
+    }
+
+    List<User> users = User.fromJsonList(response.body);
+
+    return users;
+  }
 }

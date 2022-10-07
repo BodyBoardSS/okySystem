@@ -1,9 +1,20 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:gunanacos_app/src/models/order.dart';
+import 'package:gunanacos_app/src/providers/orders_provider.dart';
 
 class RestaurantOrdersListController extends GetxController {
-  void logOut() {
-    GetStorage().remove('user');
-    Get.offNamedUntil('/', (route) => false);
+  
+  OrdersProvider ordersProvider = OrdersProvider();
+  List<String> status = <String>['PAGADO','DESPACHADO','EN CAMINO', 'ENTREGADO'].obs;
+
+  Future<List<Order>> getOrders(String status) async{
+    return ordersProvider.findByStatus(status);
+  }
+
+  void goToOrderDetail(Order order){
+    Get.toNamed('/restaurant/order/detail', arguments: {
+      'order':order.toJson(),
+      'products':order.products
+    });
   }
 }

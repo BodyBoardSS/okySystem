@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gunanacos_app/src/pages/client/home/client_home_controller.dart';
+import 'package:gunanacos_app/src/pages/client/orders/list/client_orders_list_page.dart';
 import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
 
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
@@ -14,7 +15,7 @@ class ClientHomePage extends StatelessWidget {
 
   final screens = [
     ClientProductsListPage(),
-    DeliveryOrdersListPage(),
+    ClientOrdersListPage(),
     ProfileInfoPage()
   ];
 

@@ -116,5 +116,20 @@ module.exports = {
                 data: []
             });
         })
+    },
+
+    async finByRol(req, res){
+        let users = await User.findAll({
+            include: {
+                model:Rol,
+                as:"roles",
+                where:{
+                    rol: req.params.rol
+                },
+                attributes : [ 'id' ],
+                required : true
+            }
+        });
+        res.json(users)
     }
 }

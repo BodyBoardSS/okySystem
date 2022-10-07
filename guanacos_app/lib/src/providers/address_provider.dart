@@ -24,7 +24,7 @@ class AddressProvider extends GetConnect{
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return ResponseApi();
     }
-
+    
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
 
     return responseApi;

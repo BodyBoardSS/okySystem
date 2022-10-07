@@ -10,6 +10,7 @@ const upload = multer({
     storage: multer.memoryStorage()
   });
 
+router.get('/:rol', auth, userController.finByRol)
 router.put('/updateWithImage', auth, upload.array('image',1), userController.updateUserWithImage)
 router.put('/', auth, userController.update)
 

@@ -12,7 +12,7 @@ class ClientProductsDetailPage extends StatelessWidget {
   var counter = 0.obs;
   var price = 0.0.obs;
 
-  ClientProductsDetailPage({@required this.product}){
+  ClientProductsDetailPage({Key? key, @required this.product}) : super(key: key){
     clientProductsDetailController = Get.put(ClientProductsDetailController());
   }
 

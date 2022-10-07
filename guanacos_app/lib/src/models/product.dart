@@ -1,8 +1,6 @@
-// To parse this JSON data, do
-//
-//     final product = productFromJson(jsonString);
-
 import 'dart:convert';
+
+import 'package:gunanacos_app/src/models/order_detail.dart';
 
 Product productFromJson(String str) => Product.fromJson(json.decode(str));
 
@@ -18,6 +16,7 @@ class Product {
     String? image3;
     int? idCategory;
     int? quantity;
+    OrderDetail? orderDetail;
 
     Product({
         this.id,
@@ -29,6 +28,7 @@ class Product {
         this.image3,
         this.idCategory,
         this.quantity,
+        this.orderDetail
     });
 
    
@@ -43,6 +43,7 @@ class Product {
         image3: json["image3"],
         idCategory: json["id_category"],
         quantity: json["quantity"],
+        orderDetail: json["OrderDetail"] is String ? orderDetailFromJson(json["OrderDetail"]) : json["OrderDetail"] is OrderDetail ? json["OrderDetail"] : OrderDetail.fromJson(json["OrderDetail"] ?? {}),
     );
 
     static List<Product> fromJsonList(List<dynamic> jsonList){
@@ -65,5 +66,6 @@ class Product {
         "image3": image3,
         "id_category": idCategory,
         "quantity": quantity,
+        "OrderDetail": orderDetail,
     };
 }

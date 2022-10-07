@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gunanacos_app/src/models/order.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_controller.dart';
+import 'package:gunanacos_app/src/pages/client/orders/list/client_orders_list_controller.dart';
 
 import 'package:gunanacos_app/src/widgets/no_data_widget.dart';
 import 'package:gunanacos_app/src/widgets/relative_time_util.dart';
 
 // ignore: must_be_immutable
-class DeliveryOrdersListPage extends StatelessWidget {
+class ClientOrdersListPage extends StatelessWidget {
 
-  DeliveryOrdersListPage({Key? key}) : super(key: key);
+  ClientOrdersListPage({Key? key}) : super(key: key);
 
-  DeliveryOrdersListController deliveryController = Get.put(DeliveryOrdersListController());
+  ClientOrdersListController clientController = Get.put(ClientOrdersListController());
 
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => DefaultTabController(
-        length: deliveryController.status.length,
+        length: clientController.status.length,
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize:const Size.fromHeight(50),
@@ -28,10 +28,10 @@ class DeliveryOrdersListPage extends StatelessWidget {
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey[400],
                   tabs:List<Widget>.generate(
-                    deliveryController.status.length, 
+                    clientController.status.length, 
                     (index) {
                       return Tab(
-                        child: Text(deliveryController.status[index]),
+                        child: Text(clientController.status[index]),
                       );
                     }),
                 ),
@@ -45,9 +45,9 @@ class DeliveryOrdersListPage extends StatelessWidget {
 
   TabBarView _tabBarView(BuildContext context) {
     return TabBarView(
-        children: deliveryController.status.map((String status){
+        children: clientController.status.map((String status){
           return FutureBuilder(
-            future:deliveryController.getOrders(status),
+            future:clientController.getOrders(status),
             builder: (context, AsyncSnapshot<List<Order>> snapshot) {
               if(snapshot.hasData && snapshot.data!.isNotEmpty){
                 return ListView.builder(
@@ -67,7 +67,7 @@ class DeliveryOrdersListPage extends StatelessWidget {
 
   Widget _cardOrder(Order order){
     return GestureDetector(
-      onTap: () => deliveryController.goToOrderDetail(order),
+      onTap: () => clientController.goToOrderDetail(order),
       child: Container(
         height: 150,
         margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -115,7 +115,7 @@ class DeliveryOrdersListPage extends StatelessWidget {
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 5),
                       alignment: Alignment.centerLeft,
-                      child: Text('Cliente: ${order.client?.name ??''} ${order.client?.lastName ??''}')
+                      child: Text('Repartidor: ${order.delivery?.name ??'No asignado'} ${order.delivery?.lastName ??''}')
                     ),
                     Container(
                       width: double.infinity,

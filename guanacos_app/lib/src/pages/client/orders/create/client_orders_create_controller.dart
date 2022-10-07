@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/product.dart';
@@ -59,7 +60,11 @@ class ClientOrdersCreateController extends GetxController{
   }
 
   void goToAddressList(){
-    Get.toNamed('/client/address/list');
+    if(lstProducts.isNotEmpty){
+      Get.toNamed('/client/address/list');
+    }else{
+      Fluttertoast.showToast(msg: '¡Debe agregar productos a la lista!', toastLength: Toast.LENGTH_LONG);
+    }
   }
 
 }

@@ -31,6 +31,7 @@ class Server{
       this.app.use('/api/categories',require('../routes/categories'))
       this.app.use('/api/products',require('../routes/products'))
       this.app.use('/api/address',require('../routes/address'))
+      this.app.use('/api/orders',require('../routes/orders'))
   }
 
   listen(){

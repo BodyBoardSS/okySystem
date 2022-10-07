@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:gunanacos_app/src/models/rol.dart';
+
+User userFromJson(String str) => User.fromJson(json.decode(str));
+
+String userToJson(User data) => json.encode(data.toJson());
 
 class User {
     int? id;
@@ -37,6 +43,16 @@ class User {
         roles: json["roles"] == null ? [] : List<Rol>.from(json["roles"].map((x) => Rol.fromJson(x))),
         sessionToken: json["session_token"],
     );
+
+    static List<User> fromJsonList(List<dynamic> jsonList){
+      List<User> list = [];
+      for (var item in jsonList) {
+        User user = User.fromJson(item);
+        list.add(user);
+      }
+
+      return list;
+    }
 
     Map<String, dynamic> toJson() => {
         "id": id,

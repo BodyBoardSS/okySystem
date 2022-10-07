@@ -8,16 +8,23 @@ import 'package:gunanacos_app/src/pages/client/address/create/client_address_cre
 import 'package:gunanacos_app/src/pages/client/address/list/client_address_list_page.dart';
 import 'package:gunanacos_app/src/pages/client/home/client_home_page.dart';
 import 'package:gunanacos_app/src/pages/client/orders/create/client_orders_create_page.dart';
+import 'package:gunanacos_app/src/pages/client/orders/detail/client_order_detail_page.dart';
+import 'package:gunanacos_app/src/pages/client/orders/map/client_orders_map_page.dart';
+import 'package:gunanacos_app/src/pages/client/payments/create/client_payments_create.dart';
 
 import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
+import 'package:gunanacos_app/src/pages/delivery/home/delivery_home_page.dart';
+import 'package:gunanacos_app/src/pages/delivery/orders/detail/delivery_order_detail_page.dart';
 import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
+import 'package:gunanacos_app/src/pages/delivery/orders/map/delivery_orders_map_page.dart';
 import 'package:gunanacos_app/src/pages/home/home_page.dart';
 import 'package:gunanacos_app/src/pages/login/login_page.dart';
 import 'package:gunanacos_app/src/pages/client/profile/profile_info_update_page.dart';
 import 'package:gunanacos_app/src/pages/register/register_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_page.dart';
+import 'package:gunanacos_app/src/pages/restaurant/order/detail/restaurant_order_detail_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/pages/roles/roles_page.dart';
 
@@ -53,16 +60,23 @@ class _MyAppState extends State<MyApp> {
           GetPage(name: '/home', page: () => HomePage()),
           GetPage(name: '/roles', page: () => RolesPage()),
           GetPage(name: '/restaurant/order/list', page: () => RestaurantOrdersListPage()),
+          GetPage(name: '/restaurant/order/detail', page: () => RestaurantOrderDetailPage()),
           GetPage(name: '/client/home', page: () => ClientHomePage()),
           GetPage(name: '/client/products/list', page: () => ClientProductsListPage()),
           GetPage(name: '/client/products/info', page: () => ProfileInfoPage()),
           GetPage(name: '/client/profile/update', page: () => ProfileUpdatePage()),
           GetPage(name: '/client/orders/create', page: () => ClientOrdersCreatePage()),
-          GetPage(name: '/client/address/create', page: () => ClientAddressCreatePage()),
+          GetPage(name: '/client/orders/detail', page: () => ClientOrderDetailPage()),
+          GetPage(name: '/client/orders/map', page: () => ClientOrdersMapPage()),
+          GetPage(name: '/client/address/create', page: () => const ClientAddressCreatePage()),
           GetPage(name: '/client/address/list', page: () => ClientAddressListPage()),
+          GetPage(name: '/client/payments/create', page: () => const ClientPaymentsCreate()),
           GetPage(name: '/restaurant/home', page: () => RestaurantHomePage()),
           GetPage(name: '/restaurant/category/create', page: () => const CategoryCreatePage()),
+          GetPage(name: '/delivery/home', page: () => DeliveryHomePage()),
           GetPage(name: '/delivery/orders/list', page: () => DeliveryOrdersListPage()),
+          GetPage(name: '/delivery/order/detail', page: () => DeliveryOrderDetailPage()),
+          GetPage(name: '/delivery/orders/map', page: () =>DeliveryOrdersMapPage()),
       ],
       theme: ThemeData(
         primaryColor: Colors.amber,
