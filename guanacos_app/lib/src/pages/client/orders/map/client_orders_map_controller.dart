@@ -90,7 +90,6 @@ class ClientOrdersMapController extends GetxController {
     try {
       await _determinePosition();
       position = await Geolocator.getLastKnownPosition();
-      saveLocation();
       animateCameraPosition(order.lat ?? 13.6817911, order.lng ?? -89.1922692);
       addMarker('delivery', order.lat ?? 13.6817911, order.lng ?? -89.1922692, 'Tú repartido', '', deliveryMarker!);
       addMarker('home', order.address?.lat ?? 13.6817911, order.address?.lng ?? -89.1922692, 'Tú posición', '', homeMarker!);
@@ -145,14 +144,6 @@ class ClientOrdersMapController extends GetxController {
     BitmapDescriptor descriptor = await BitmapDescriptor.fromAssetImage(configuration, path);
 
     return descriptor;
-  }
-
-  void saveLocation() async{
-    if(position != null){
-      order.lat = position!.latitude;
-      order.lng = position!.longitude;
-      await ordersProvider.update(order);
-    }
   }
 
   Future<void> setPolylines(LatLng from, LatLng to) async{

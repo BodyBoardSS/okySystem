@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,8 +11,15 @@ import 'package:gunanacos_app/src/environment/environment.dart';
 import 'package:gunanacos_app/src/models/order.dart';
 import 'package:gunanacos_app/src/providers/orders_provider.dart';
 import 'package:location/location.dart' as location;
+import 'package:socket_io_client/socket_io_client.dart';
 
 class DeliveryOrdersMapController extends GetxController {
+
+  Socket socket = io('${Environment.apiUrl}orders/delivery', <String, dynamic>{
+    'transports' : ['websocket'],
+    'autoConnect': false
+  });
+
   CameraPosition initialPosition = const CameraPosition(target: LatLng(13.6817911, -89.1922692), zoom: 14);
 
   Completer<GoogleMapController> mapController = Completer();
@@ -36,6 +41,7 @@ class DeliveryOrdersMapController extends GetxController {
 
   DeliveryOrdersMapController(){
     checkGPS(); 
+    connectAndListen();
   }
 
   void selectRefPoint(BuildContext context){
@@ -71,24 +77,6 @@ class DeliveryOrdersMapController extends GetxController {
     }
 
     return await Geolocator.getCurrentPosition();
-  }
-
-  // ignore: prefer_void_to_null
-  Future<Null> setLocationDraggableInfo() async{
-    double lat = initialPosition.target.latitude;
-    double lng = initialPosition.target.longitude;
-
-    List<Placemark> address = await placemarkFromCoordinates(lat, lng);
-
-    if(address.isNotEmpty){
-      String direction = address[0].thoroughfare ?? '';
-      String street = address[0].subThoroughfare ?? '';
-      String city = address[0].locality ?? '';
-      String departament = address[0].administrativeArea ?? '';
-      //String country = address[0].country ?? '';
-
-      addresLatLng = LatLng(lat, lng);
-    }
   }
 
   void checkGPS() async{
@@ -155,6 +143,7 @@ class DeliveryOrdersMapController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    socket.disconnect();
     positionSubscribe?.cancel();
   }
 
@@ -217,5 +206,12 @@ class DeliveryOrdersMapController extends GetxController {
   void callNumber() async{
     String number = order.client?.phone ?? '';
     await FlutterPhoneDirectCaller.callNumber(number);
+  }
+
+  void connectAndListen(){
+    socket.connect();
+    socket.onConnect((data){
+        print('Este dispositivo se conecto a SocketIO');
+    });
   }
 }
