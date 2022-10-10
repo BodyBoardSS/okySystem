@@ -46,7 +46,7 @@ class Order {
         id: json["id"],
         lat: json["lat"],
         lng: json["lng"],
-        total: json["total"],
+        total: json["total"] is int ? json["total"].toDouble() : json["total"],
         status: json["status"],
         createdDate: json["createdDate"],
         idclient: json["idclient"],

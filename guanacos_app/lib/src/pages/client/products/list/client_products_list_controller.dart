@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/category.dart';
 import 'package:gunanacos_app/src/models/product.dart';
 import 'package:gunanacos_app/src/pages/client/products/detail/client_detail_page.dart';
@@ -12,9 +15,26 @@ class ClientProductsListController extends GetxController{
   ProductsProvider productsProvider = ProductsProvider();
 
   List<Category> categories = <Category>[].obs;
+  List<Product> lstProducts = [];
+
+  var items = 0.obs;
+  var productName = ''.obs;
+  Timer? searchOnStopedTyping;
 
   ClientProductsListController(){
     getCategories();
+    if(GetStorage().read('shoppinBag') != null) {
+      if(GetStorage().read('shoppinBag') is List<Product>) {
+        lstProducts = GetStorage().read('shoppinBag');
+      } else {
+        lstProducts = Product.fromJsonList(GetStorage().read('shoppinBag'));
+      }
+
+      for (var p in lstProducts) {
+        items.value = items.value + (p.quantity!);
+      }
+
+    }
   } 
 
   void goToOrderCreate(){
@@ -27,8 +47,12 @@ class ClientProductsListController extends GetxController{
     categories.addAll(result);
   }
 
-  Future<List<Product>> getProduct(int categoryId) async{
-    return await productsProvider.findByCategory(categoryId);
+  Future<List<Product>> getProduct(int categoryId, String name) async{
+    if(name.isEmpty){
+      return await productsProvider.findByCategory(categoryId);
+    }else {
+      return await productsProvider.findByCategoryAndName(categoryId,name);
+    }
   }
 
   void openModelBottomSheet(BuildContext context, Product product){
@@ -36,5 +60,16 @@ class ClientProductsListController extends GetxController{
       context: context, 
       builder: (context) => ClientProductsDetailPage(product: product,)
     );
+  }
+
+  void onChangeText(String text){
+    const duration = Duration(milliseconds: 800);
+    if(searchOnStopedTyping != null){
+      searchOnStopedTyping?.cancel();
+    }
+
+    searchOnStopedTyping = Timer(duration, (){
+      productName.value = text;
+    });
   }
 }

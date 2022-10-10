@@ -1,6 +1,7 @@
 const { Category, Product } = require('../models/index')
 const storage = require('../ultils/cloud_storage')
 const asyncForEach = require('../ultils/async_foreach')
+const { Op } = require('sequelize')
 
 module.exports = {
     async index(req, res) {
@@ -14,11 +15,23 @@ module.exports = {
         
         res.json(products)
     },
+
     async findByCategory(req, res) {
         const { categoryId } = req.params;
         let products = await Product.findAll({
             where:{
-                categoryid:categoryId
+                categoryid:categoryId,
+            }
+        })
+        res.json(products)
+    },
+
+    async findByCategoryAndName(req, res) {
+        const { categoryId, name } = req.params;
+        let products = await Product.findAll({
+            where:{
+                categoryid:categoryId,
+                name: { [Op.like]: `%${name}%` }
             }
         })
         res.json(products)
@@ -38,7 +51,7 @@ module.exports = {
             });
         } else {
             
-            Product.create({
+            await Product.create({
                 name: product.name,
                 description: product.description,
                 price: product.price,
@@ -87,6 +100,7 @@ module.exports = {
                 }
                 start();
             }).catch(err => {
+                console.log(`Ocurrio un error ${err}`)
                 res.status(500).json({
                     success: false,
                     message: err,
@@ -97,9 +111,9 @@ module.exports = {
 
     },
 
-    update(req, res) {
+    async update(req, res) {
         const { id } = req.params;
-        Product.update({
+        await Product.update({
             name: req.body.name,
             price: req.body.price,
             description: req.body.description,
@@ -113,6 +127,7 @@ module.exports = {
             res.json({ message: "Updated successfully" });
             console.log(`Project with id = ${id} updated successfully!`);
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -121,7 +136,7 @@ module.exports = {
         });
     },
 
-    delete(req, res) {
+    async delete(req, res) {
         const { id } = req.params;
         Product.destroy({
             where: {
@@ -131,6 +146,7 @@ module.exports = {
             res.json({ message: "Deleted successfully" });
             console.log(`Project with id = ${id} deleted successfully!`);
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,

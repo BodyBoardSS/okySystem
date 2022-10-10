@@ -31,7 +31,7 @@ class UserProvider extends GetConnect {
   }
 
   Future<Stream> createWithImage(User user, File img) async{
-    Uri uri = Uri.http(Environment.apiUrlOld, '/api/signUpWithImage');
+    Uri uri = Uri.https(Environment.apiUrlOld, '/api/signUpWithImage');
 
     final request = http.MultipartRequest('POST', uri);
     request.files.add(http.MultipartFile(
@@ -49,7 +49,7 @@ class UserProvider extends GetConnect {
   }
 
   Future<Stream> updateWithImage(User user, File img) async{
-    Uri uri = Uri.http(Environment.apiUrlOld, '/api/users/updateWithImage');
+    Uri uri = Uri.https(Environment.apiUrlOld, '/api/users/updateWithImage');
     final request = http.MultipartRequest('PUT', uri);
     request.headers['Authorization'] = user.sessionToken ?? '';
     request.files.add(http.MultipartFile(
@@ -77,7 +77,7 @@ class UserProvider extends GetConnect {
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas, favor vuelva a intentarlo mas tarde.");
       return ResponseApi();
     }
@@ -103,7 +103,7 @@ class UserProvider extends GetConnect {
     );
     
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas, favor vuelva a intentarlo mas tarde.");
       return ResponseApi();
     }
@@ -121,7 +121,7 @@ class UserProvider extends GetConnect {
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

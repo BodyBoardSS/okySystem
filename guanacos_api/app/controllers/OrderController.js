@@ -1,4 +1,5 @@
 const { Order, OrderDetail,User, Address, Product} = require('../models/index');
+const PushNotificationController = require('../controllers/PushNotificationController')
 
 module.exports = {
     async index(req, res) {
@@ -6,8 +7,8 @@ module.exports = {
         res.json(orders)
     },
 
-    create(req, res) {
-        Order.create({
+    async create(req, res) {
+        await Order.create({
             lat: req.body.lat,
             lng: req.body.lng,
             status: req.body.status,
@@ -36,6 +37,7 @@ module.exports = {
                 data: order
             })
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -44,9 +46,9 @@ module.exports = {
         });
     },
 
-    update(req, res) {
+    async update(req, res) {
         const { id } = req.params;
-        Order.update({
+        await Order.update({
             status: req.body.status,
             updatedAt: new Date(),
             iddelivery: req.body.iddelivery,
@@ -56,13 +58,34 @@ module.exports = {
             {
                 where: { id: id }
             }
-        ).then(function () {
+        ).then(async function () {
+            var titleNoti =''
+            var textBody =''
+            var tokeNoti=''
+            if(req.body.status !== undefined){
+                if(req.body.status === 'DESPACHADO'){
+                    let user = await User.findByPk(req.body.iddelivery);
+                    if(user !== undefined && user != null){
+                        titleNoti = 'Pedido Asignado'
+                        textBody='Se le ha asignado un pedido para ser entregado.'
+                        tokeNoti=user.notificationToken
+                    }
+                }
+
+                PushNotificationController.sendNotification(tokeNoti,{
+                    title:titleNoti,
+                    body:textBody,
+                    id_notification:'1'
+                })
+            }
+
             res.status(201).json({
                 success: true,
                 message: 'La orden fue actualizada con éxito.',
                 data: id
             })
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -71,15 +94,16 @@ module.exports = {
         });
     },
 
-    delete(req, res) {
+    async delete(req, res) {
         const { id } = req.params;
-        Order.destroy({
+        await Order.destroy({
             where: {
                 id: id
             }
         }).then(function () {
             res.json({ message: "Deleted successfully" });
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -119,7 +143,7 @@ module.exports = {
         res.json(orders);
     },
 
-    async findByIdUser(req, res) {
+    async findByIdDelivery(req, res) {
         let orders = await Order.findAll(
             {
                 where:{
@@ -132,8 +156,33 @@ module.exports = {
                         model:User ,
                         as:"delivery",
                         where:{
-                            id:req.params.iduser
+                            id:req.params.idDelivery
                         }
+                    },
+                    {model:Product ,as:"products"},
+                ]
+            }
+        );
+
+        res.json(orders);
+    },
+
+    async findByIdClient(req, res) {
+        let orders = await Order.findAll(
+            {
+                where:{
+                    status:req.params.status
+                },
+                include: [
+                    {model:User ,as:"client",
+                    where:{
+                        id:req.params.iduser
+                    }},
+                    {model:Address ,as:"address"},
+                    {
+                        model:User ,
+                        as:"delivery",
+                        
                     },
                     {model:Product ,as:"products"},
                 ]

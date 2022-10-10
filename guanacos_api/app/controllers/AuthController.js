@@ -25,7 +25,7 @@ module.exports = {
             where: {
                 email: email
             }
-        }).then(user => {
+        }).then(async user => {
             if (!user) {
                 res.status(404).json({
                     success: false,
@@ -39,7 +39,7 @@ module.exports = {
                         expiresIn: authConfig.expires
                     })
                     
-                    User.findByPk(user.id, {
+                    await User.findByPk(user.id, {
                         include: {model:Rol ,as:"roles", attributes:['id','rol','image','route']}
                     }).then( user => {
                         const data = {
@@ -58,17 +58,25 @@ module.exports = {
                             message: 'El usuario fue autenticado.',
                             data: data
                         })
+                    }).catch(err => {
+                        console.log(`Ocurrio un error ${err}`)
+                        res.status(500).json({
+                            success: false,
+                            message: err,
+                            data: null
+                        })
                     })
                 } else {
-                    res.status(401).json({
+                    res.status(404).json({
                         success: false,
-                        message: 'El password es incorrecto',
+                        message: 'Contraseña incorrecto',
                         data: null
                     })
                 }
             }
         }).catch(err => {
-            res.status(401).json({
+            console.log(`Ocurrio un error ${err}`)
+            res.status(500).json({
                 success: false,
                 message: err,
                 data: null
@@ -111,6 +119,7 @@ module.exports = {
                 data: data
             })
         }).catch(err => {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -164,7 +173,7 @@ module.exports = {
                     console.log(`Image: ${image}`)
                 }
     
-            User.create({
+            await User.create({
                 name: userReq.name,
                 email: userReq.email,
                 lastName: userReq.lastName,
@@ -200,6 +209,7 @@ module.exports = {
                 })
     
             }).catch(err => {
+                console.log(`Ocurrio un error ${err}`)
                 res.status(500).json({
                     success: false,
                     message: err,

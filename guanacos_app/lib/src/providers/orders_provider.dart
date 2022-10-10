@@ -20,7 +20,7 @@ class OrdersProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return ResponseApi();
     }
@@ -40,7 +40,7 @@ class OrdersProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return ResponseApi();
     }
@@ -59,7 +59,7 @@ class OrdersProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }
@@ -83,7 +83,55 @@ class OrdersProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
+      return [];
+    }
+
+    if(response.statusCode == 401){
+      Get.snackbar('Petición denegada', 'Privilegios insuficientes');
+      return [];
+    }
+  
+    List<Order> orders = Order.fromJsonList(response.body);
+
+    return orders;
+  }
+
+  Future<List<Order>> findByClientAndStatus(String status, int idUser) async {
+    Response response = await get(
+      '$url/orders/client/$status/$idUser',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
+      }
+    );
+
+    if(response.statusCode == 500 || response.statusCode == null) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
+      return [];
+    }
+
+    if(response.statusCode == 401){
+      Get.snackbar('Petición denegada', 'Privilegios insuficientes');
+      return [];
+    }
+  
+    List<Order> orders = Order.fromJsonList(response.body);
+
+    return orders;
+  }
+
+  Future<List<Order>> findByDeliveryAndStatus(String status, int idUser) async {
+    Response response = await get(
+      '$url/orders/delivery/$status/$idUser',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
+      }
+    );
+
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

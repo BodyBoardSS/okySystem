@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,8 +12,13 @@ import 'package:gunanacos_app/src/environment/environment.dart';
 import 'package:gunanacos_app/src/models/order.dart';
 import 'package:gunanacos_app/src/providers/orders_provider.dart';
 import 'package:location/location.dart' as location;
+import 'package:socket_io_client/socket_io_client.dart';
 
 class ClientOrdersMapController extends GetxController {
+  Socket socket = io('${Environment.apiUrl}orders/delivery', <String, dynamic>{
+    'transports' : ['websocket'],
+    'autoConnect': false
+  });
   CameraPosition initialPosition = const CameraPosition(target: LatLng(13.6817911, -89.1922692), zoom: 14);
 
   Completer<GoogleMapController> mapController = Completer();
@@ -34,6 +40,7 @@ class ClientOrdersMapController extends GetxController {
 
   ClientOrdersMapController(){
     checkGPS(); 
+    connectAndListen();
   }
 
   void selectRefPoint(BuildContext context){
@@ -122,6 +129,7 @@ class ClientOrdersMapController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    socket.disconnect();
     positionSubscribe?.cancel();
   }
 
@@ -176,5 +184,31 @@ class ClientOrdersMapController extends GetxController {
   void callNumber() async{
     String number = order.delivery?.phone ?? '';
     await FlutterPhoneDirectCaller.callNumber(number);
+  }
+
+  void connectAndListen(){
+    socket.connect();
+    socket.onConnect((data){
+        if (kDebugMode) {
+          print('Este dispositivo se conecto a SocketIO');
+        }
+    });
+    listenPosition();
+    listenToDelivered();
+  }
+
+  void listenPosition(){
+    socket.on('position/${order.id}', (data){
+      addMarker('delivery', data['lat'], data['lng'], 'Tú repartido', '', deliveryMarker!);
+    });
+  }
+
+  void listenToDelivered(){
+    socket.on('delivered/${order.id}', (data){
+      Fluttertoast.showToast(msg: 'El estado de la orden se actualizó a entregado.',
+      toastLength: Toast.LENGTH_LONG
+      );
+      Get.offNamedUntil('/client/home', (route) => false);
+    });
   }
 }

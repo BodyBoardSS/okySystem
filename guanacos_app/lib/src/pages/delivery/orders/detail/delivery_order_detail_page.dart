@@ -16,7 +16,7 @@ class DeliveryOrderDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height * 0.45,
+        height: MediaQuery.of(context).size.height * 0.60,
         padding: const EdgeInsets.only(top: 15),
         child: Column(
           children: [

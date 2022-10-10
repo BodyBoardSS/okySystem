@@ -11,7 +11,7 @@ class DeliveryOrdersListController extends GetxController {
   List<String> status = <String>['DESPACHADO','EN CAMINO', 'ENTREGADO'].obs;
 
   Future<List<Order>> getOrders(String status) async{
-    return ordersProvider.findByUserAndStatus(status,user.id ?? 0);
+    return ordersProvider.findByDeliveryAndStatus(status,user.id ?? 0);
   }
 
   void goToOrderDetail(Order order){

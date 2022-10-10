@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -27,11 +29,25 @@ import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_page.dar
 import 'package:gunanacos_app/src/pages/restaurant/order/detail/restaurant_order_detail_page.dart';
 import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
 import 'package:gunanacos_app/src/pages/roles/roles_page.dart';
+import 'package:gunanacos_app/src/providers/push_notifications_provider.dart';
+import 'package:gunanacos_app/src/widgets/firebase_config.dart';
 
 User uSession = User.fromJson(GetStorage().read('user') ?? {});
 
+PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
+}
+
 void main() async{
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseConfig.currentPlatform,
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  pushNotificationsProvider.initPushNotifications();
   runApp(const MyApp());
 }
 
@@ -46,6 +62,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    pushNotificationsProvider.onMessageListener();
   }
   @override
   Widget build(BuildContext context) {

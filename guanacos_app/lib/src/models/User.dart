@@ -17,6 +17,7 @@ class User {
     String? idrol;
     List<Rol>? roles;
     String? sessionToken;
+    String? notificationToken;
 
     User({
         this.id,
@@ -29,6 +30,7 @@ class User {
         this.roles,
         this.sessionToken,
         this.idrol,
+        this.notificationToken
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
@@ -42,6 +44,7 @@ class User {
         idrol: json["idrol"],
         roles: json["roles"] == null ? [] : List<Rol>.from(json["roles"].map((x) => Rol.fromJson(x))),
         sessionToken: json["session_token"],
+        notificationToken: json["notificationToken"],
     );
 
     static List<User> fromJsonList(List<dynamic> jsonList){
@@ -65,5 +68,6 @@ class User {
         "roles": roles,
         "session_token": sessionToken,
         "idrol": idrol,
+        "notificationToken":notificationToken
     };
 }

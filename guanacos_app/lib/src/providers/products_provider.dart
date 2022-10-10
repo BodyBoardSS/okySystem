@@ -17,7 +17,7 @@ class ProductsProvider extends GetConnect{
   String url = "${Environment.apiUrl}api";
 
   Future<Stream> create(Product product, List<File> images) async{
-    Uri uri = Uri.http(Environment.apiUrlOld, '/api/products');
+    Uri uri = Uri.https(Environment.apiUrlOld, '/api/products');
 
     final request = http.MultipartRequest('POST', uri);
 
@@ -50,7 +50,31 @@ class ProductsProvider extends GetConnect{
       }
     );
 
-     if(response.statusCode == 500) {
+     if(response.statusCode == 500 || response.statusCode == null) {
+      Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
+      return [];
+    }
+
+    if(response.statusCode == 401){
+      Get.snackbar('Petición denegada', 'Privilegios insuficientes');
+      return [];
+    }
+
+    List<Product> products = Product.fromJsonList(response.body);
+
+    return products;
+  }
+
+   Future<List<Product>> findByCategoryAndName(int idCategory, String name) async {
+    Response response = await get(
+      '$url/products/$idCategory/$name',
+      headers: {
+        'Content-Type' : 'application/json',
+        'Authorization' : user.sessionToken ?? ''
+      }
+    );
+
+     if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

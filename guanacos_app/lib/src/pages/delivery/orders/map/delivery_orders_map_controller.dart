@@ -4,11 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gunanacos_app/src/environment/environment.dart';
 import 'package:gunanacos_app/src/models/order.dart';
+import 'package:gunanacos_app/src/models/response_api.dart';
 import 'package:gunanacos_app/src/providers/orders_provider.dart';
 import 'package:location/location.dart' as location;
 import 'package:socket_io_client/socket_io_client.dart';
@@ -27,6 +29,9 @@ class DeliveryOrdersMapController extends GetxController {
   Position? position;
   LatLng? addresLatLng;
 
+  double distanceBetween=  0.0;
+  bool isClose = false;
+
   Order order = Order.fromJson(Get.arguments['order'] ?? {});
   OrdersProvider ordersProvider = OrdersProvider();
 
@@ -42,16 +47,6 @@ class DeliveryOrdersMapController extends GetxController {
   DeliveryOrdersMapController(){
     checkGPS(); 
     connectAndListen();
-  }
-
-  void selectRefPoint(BuildContext context){
-    if(addresLatLng != null){
-      Map<String, dynamic> data = {
-        'lat':addresLatLng!.latitude,
-        'lng':addresLatLng!.longitude
-      };
-      Navigator.pop(context, data);
-    }
   }
 
   Future<Position> _determinePosition() async {
@@ -114,9 +109,11 @@ class DeliveryOrdersMapController extends GetxController {
         locationSettings: locationSettings
       ).listen((Position p) { //Position real time
         // ignore: unused_label
-        position:p;
+        position=p;
         addMarker('delivery', position?.latitude ?? 13.6817911, position?.longitude ?? -89.1922692, 'Tú posición', '', deliveryMarker!);
         animateCameraPosition(position?.latitude ?? 13.6817911, position?.longitude ?? -89.1922692);
+        emitPosition();
+        isCloseToDeliveryPosition();
       });
     } catch (e) {
       if (kDebugMode) {
@@ -211,7 +208,55 @@ class DeliveryOrdersMapController extends GetxController {
   void connectAndListen(){
     socket.connect();
     socket.onConnect((data){
-        print('Este dispositivo se conecto a SocketIO');
+        if (kDebugMode) {
+          print('Este dispositivo se conecto a SocketIO');
+        }
+    });
+  }
+
+  void emitPosition(){
+    if(position != null){
+      socket.emit('position', {
+        'id_order':order.id,
+        'lat':position!.latitude,
+        'lng':position!.longitude,
+      });
+    }
+  }
+
+  void isCloseToDeliveryPosition(){
+    if(position != null){
+      distanceBetween = Geolocator.distanceBetween(
+        position!.latitude, 
+        position!.longitude, 
+        order.address!.lat!,
+        order.address!.lng!
+      );
+
+      if(distanceBetween <= 200 && isClose == false){
+        isClose = true;
+        update();
+      }
+    }
+  }
+
+  void updateToDelivered() async {
+    if(distanceBetween <= 200){
+      order.status = 'ENTREGADO';
+      ResponseApi responseApi = await ordersProvider.update(order);
+      Fluttertoast.showToast(msg: responseApi.message ?? '', toastLength: Toast.LENGTH_LONG);
+      if(responseApi.success == true){
+        emitToDelivered();
+        Get.offNamedUntil('/delivery/home', (route) => false);
+      }
+    } else {
+      Get.snackbar('Operacion no permitida', 'Debes estar más cerca a la posición de entrega del pedido');
+    }
+  }
+
+  void emitToDelivered(){
+    socket.emit('delivered', {
+    'id_order':order.id
     });
   }
 }

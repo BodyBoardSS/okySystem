@@ -16,7 +16,7 @@ class DeliveryOrdersMapPage extends StatelessWidget {
       builder: (value) => Scaffold(
       body: Stack(children: [
         SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.45,
             child: _googleMaps()),
         SafeArea(
           child: Column(
@@ -65,7 +65,7 @@ class DeliveryOrdersMapPage extends StatelessWidget {
 
   Widget _cardOrderInfo(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.42,
+      height: MediaQuery.of(context).size.height * 0.55,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -111,7 +111,7 @@ class DeliveryOrdersMapPage extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.only(left: 30, right: 30),
       child: ElevatedButton(
-        onPressed: () => mapController.selectRefPoint(context),
+        onPressed: mapController.isClose == true ? () => mapController.updateToDelivered() : null,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

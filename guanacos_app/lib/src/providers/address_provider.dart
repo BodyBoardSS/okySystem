@@ -39,7 +39,7 @@ class AddressProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == 500 || response.statusCode == null) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

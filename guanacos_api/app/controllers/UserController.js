@@ -28,7 +28,7 @@ module.exports = {
                     image = url
             }
 
-        User.update({
+        await User.update({
             name: userReq.name,
             lastName: userReq.lastName,
             phone: userReq.phone,
@@ -37,7 +37,7 @@ module.exports = {
         {
             where: { id: userReq.id }
         }).then(async u => {
-            User.findByPk(userReq.id, {
+            await User.findByPk(userReq.id, {
                 include: {model:Rol ,as:"roles", attributes:['id','rol','image','route']}
             }).then( user => {
                 const data = {
@@ -56,9 +56,16 @@ module.exports = {
                     message: 'El usuario fue modificado.',
                     data: data
                 })
+            }).catch(err => {
+                console.log(`Ocurrio un error ${err}`)
+                res.status(500).json({
+                    success: false,
+                    message: err,
+                    data: []
+                });
             })
-
         }).catch(err => {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -84,7 +91,8 @@ module.exports = {
         await User.update({
             name: userReq.name,
             lastName: userReq.lastName,
-            phone: userReq.phone
+            phone: userReq.phone,
+            notificationToken: userReq.notificationToken
         },
         {
             where: { id: userReq.id }
@@ -100,6 +108,7 @@ module.exports = {
                     phone: user.phone,
                     image: user.image,
                     roles : user.roles,
+                    notificationToken: user.notificationToken,
                     session_token: userReq.session_token
                 }
 
@@ -110,6 +119,7 @@ module.exports = {
                 })
             })
         }).catch(err => {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,

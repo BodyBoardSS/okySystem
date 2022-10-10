@@ -50,10 +50,17 @@ class ClientAddressListController extends GetxController{
   void createOrder() async{
     Address a = GetStorage().read('address') is Address? GetStorage().read('address') : Address.fromJson(GetStorage().read('address') ?? {});
     List<Product> products = GetStorage().read('shoppinBag');
+    double totalC = 0.0;
+
+    for (var product in products) {
+      totalC = totalC + (product.quantity! * product.price!);
+    }
+
     Order order = Order(
       idclient: user.id,
       idaddress: a.id,
       status: 'PAGADO',
+      total: totalC,
       detail: products
     );
 

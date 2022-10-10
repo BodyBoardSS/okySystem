@@ -31,8 +31,8 @@ module.exports = {
         res.json(address)
     },
 
-    create(req, res){
-        Address.create({
+    async create(req, res){
+        await Address.create({
             address: req.body.address,
             neighborhood : req.body.neighborhood,
             lat : req.body.lat,
@@ -45,7 +45,7 @@ module.exports = {
                 data: address
             })
         }).catch(function (err) {
-            console.log(`Error = ${err}`);
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: true,
                 message: 'El registro no pudo ser creado.',
@@ -72,6 +72,7 @@ module.exports = {
                 data: address
             })
         }).catch(err => {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,

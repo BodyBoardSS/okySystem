@@ -6,14 +6,15 @@ module.exports = {
         res.json(methods)
     },
 
-    create(req, res) {
-        PaymentMethod.create({
+    async create(req, res) {
+        await PaymentMethod.create({
             name     : req.body.name
         }).then(method => {
             PaymentMethod.findAll().then(methods => {
                 res.json(methods);
             });
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -22,9 +23,9 @@ module.exports = {
         });
     },
 
-    update(req, res) {
+    async update(req, res) {
         const { id } = req.params;
-        PaymentMethod.update({
+        await PaymentMethod.update({
             name     : req.body.name
         },
             {
@@ -35,6 +36,7 @@ module.exports = {
                 res.json(methods);
             });
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,
@@ -43,9 +45,9 @@ module.exports = {
         });
     },
 
-    delete(req, res) {
+    async delete(req, res) {
         const { id } = req.params;
-        PaymentMethod.destroy({
+        await PaymentMethod.destroy({
             where: {
                 id: id
             }
@@ -54,6 +56,7 @@ module.exports = {
                 res.json(methods);
             });
         }).catch(function (err) {
+            console.log(`Ocurrio un error ${err}`)
             res.status(500).json({
                 success: false,
                 message: err,

@@ -13,6 +13,7 @@ const upload = multer({
 
 router.get('/', auth, productController.index)
 router.get('/:categoryId', auth, productController.findByCategory)
+router.get('/:categoryId/:name', auth, productController.findByCategoryAndName)
 router.post('/', auth, upload.array('image',3), GlobalPolicy.isAdmin, productController.create)
 router.put('/', auth, GlobalPolicy.isAdmin, productController.update)
 router.delete('/', auth, GlobalPolicy.isAdmin, productController.delete)

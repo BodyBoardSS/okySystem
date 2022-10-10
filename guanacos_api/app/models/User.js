@@ -43,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     },image: {
       type: DataTypes.STRING,
       allowNull: true,
+    },notificationToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      field:'notification_token'
     },
     password: {
       type: DataTypes.STRING,

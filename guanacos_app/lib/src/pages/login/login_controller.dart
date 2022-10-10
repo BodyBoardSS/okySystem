@@ -32,9 +32,6 @@ class LoginController extends GetxController{
           goToClientHomePage();
         }
       }
-      else {
-        Get.snackbar('Error', responseApi.message ?? '');
-      }
     }
   }
 

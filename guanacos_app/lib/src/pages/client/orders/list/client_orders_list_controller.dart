@@ -11,11 +11,11 @@ class ClientOrdersListController extends GetxController {
   List<String> status = <String>['DESPACHADO','EN CAMINO', 'ENTREGADO'].obs;
 
   Future<List<Order>> getOrders(String status) async{
-    return ordersProvider.findByUserAndStatus(status,user.id ?? 0);
+    return ordersProvider.findByClientAndStatus(status,user.id ?? 0);
   }
 
   void goToOrderDetail(Order order){
-    Get.toNamed('/client/order/detail', arguments: {
+    Get.toNamed('/client/orders/detail', arguments: {
       'order':order.toJson(),
       'products':order.products
     });

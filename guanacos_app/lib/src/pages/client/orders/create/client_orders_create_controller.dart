@@ -2,11 +2,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gunanacos_app/src/models/product.dart';
+import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
 
 class ClientOrdersCreateController extends GetxController{
 
   List<Product> lstProducts = <Product>[].obs;
   var total = 0.0.obs;
+
+  ClientProductsListController productsListController = Get.find();
 
   ClientOrdersCreateController(){
     if(GetStorage().read('shoppinBag') != null) {
@@ -40,6 +43,7 @@ class ClientOrdersCreateController extends GetxController{
     lstProducts.insert(index, product);
     GetStorage().write('shoppinBag', lstProducts);
     getTotal();
+    modifyNumberBag();
   }
 
   void removeItem(Product product){
@@ -50,6 +54,7 @@ class ClientOrdersCreateController extends GetxController{
       lstProducts.insert(index, product);
       GetStorage().write('shoppinBag', lstProducts);
       getTotal();
+      modifyNumberBag();
     }
   }
 
@@ -57,6 +62,11 @@ class ClientOrdersCreateController extends GetxController{
     lstProducts.remove(product);
     GetStorage().write('shoppinBag', lstProducts);
     getTotal();
+    if(lstProducts.isEmpty){
+      productsListController.items.value = 0;
+    }else{
+      modifyNumberBag();
+    }
   }
 
   void goToAddressList(){
@@ -64,6 +74,13 @@ class ClientOrdersCreateController extends GetxController{
       Get.toNamed('/client/address/list');
     }else{
       Fluttertoast.showToast(msg: '¡Debe agregar productos a la lista!', toastLength: Toast.LENGTH_LONG);
+    }
+  }
+
+  void modifyNumberBag(){
+    productsListController.items.value = 0;
+    for (var p in lstProducts) {
+        productsListController.items.value = productsListController.items.value + (p.quantity!);
     }
   }
 

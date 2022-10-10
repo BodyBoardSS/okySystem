@@ -17,8 +17,8 @@ class RestaurantOrderDetailPage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Container(
         height: restaurantController.order.status == 'PAGADO' ? 
-        MediaQuery.of(context).size.height*0.55
-        : MediaQuery.of(context).size.height*0.50,
+        MediaQuery.of(context).size.height*0.70
+        : MediaQuery.of(context).size.height*0.70,
         padding: const EdgeInsets.only(top: 15),
         child: Column(
           children: [
