@@ -9,10 +9,11 @@ module.exports = {
 
     async create(req, res) {
         await Order.create({
-            lat: req.body.lat,
+            lat: req.body.total,
             lng: req.body.lng,
             status: req.body.status,
             createdDate: Date.now(),
+            total:req.body.total,
             idclient: req.body.idclient,
             idaddress: req.body.idaddress
         }).then(order => {

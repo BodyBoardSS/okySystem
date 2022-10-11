@@ -77,7 +77,7 @@ class UserProvider extends GetConnect {
       }
     );
 
-    if(response.statusCode == 500 || response.statusCode == null) {
+    if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas, favor vuelva a intentarlo mas tarde.");
       return ResponseApi();
     }
@@ -103,7 +103,7 @@ class UserProvider extends GetConnect {
     );
     
 
-    if(response.statusCode == 500 || response.statusCode == null) {
+    if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas, favor vuelva a intentarlo mas tarde.");
       return ResponseApi();
     }
@@ -121,7 +121,7 @@ class UserProvider extends GetConnect {
       }
     );
 
-    if(response.statusCode == 500 || response.statusCode == null) {
+    if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

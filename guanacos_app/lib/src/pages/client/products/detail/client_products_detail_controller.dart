@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -22,21 +24,21 @@ class ClientProductsDetailController extends GetxController {
       int index = lstProducts.indexWhere((p) => p.id == product.id);
       if (index != -1) {
         counter.value = lstProducts[index].quantity ?? 0;
-        price.value = product.price! * counter.value;
+        price.value = roundDouble((product.price! * counter.value),2);
       }
     }
   }
 
   void addItem(Product product, var price, var counter) {
     counter.value = counter.value + 1;
-    price.value = product.price! * counter.value;
+    price.value = roundDouble((product.price! * counter.value),2);
     modifyNumberBag();
   }
 
   void removeItem(Product product, var price, var counter) {
     if (counter.value > 0) {
       counter.value = counter.value - 1;
-      price.value = product.price! * counter.value;
+      price.value = roundDouble((product.price! * counter.value),2);
       modifyNumberBag();
     }
   }
@@ -75,5 +77,10 @@ class ClientProductsDetailController extends GetxController {
       clientProductsListController.items.value =
           clientProductsListController.items.value + (p.quantity!);
     }
+  }
+
+  double roundDouble(double value, int places){ 
+    num mod = pow(10.0, places); 
+    return ((value * mod).round().toDouble() / mod); 
   }
 }

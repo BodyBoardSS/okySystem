@@ -145,7 +145,7 @@ class DeliveryOrderDetailPage extends StatelessWidget {
                 : MainAxisAlignment.start,
             children: [
               Text(
-                'Total: \$${deliveryController.order.total}',
+                'Total: \$${(deliveryController.order.total)!.toStringAsFixed(2)}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
@@ -165,7 +165,7 @@ class DeliveryOrderDetailPage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 30),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(15), primary: Colors.amber),
+                padding: const EdgeInsets.all(15), backgroundColor: Colors.amber),
             onPressed: () => deliveryController.updateOrder(),
             child: const Text(
               'Iniciar Entrega',
@@ -181,7 +181,7 @@ class DeliveryOrderDetailPage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 30),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(15), primary: Colors.amber),
+                padding: const EdgeInsets.all(15)),
             onPressed: () => deliveryController.goToOrderMap(),
             child: const Text(
               'Volver a la ruta',

@@ -93,7 +93,7 @@ class ClientProductsListPage extends StatelessWidget {
                     style: const TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 10),
-                  Text('\$ ${product.price}',
+                  Text('\$ ${(product.price)!.toStringAsFixed(2)}',
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold

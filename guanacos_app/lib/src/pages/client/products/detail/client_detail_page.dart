@@ -67,7 +67,7 @@ class ClientProductsDetailPage extends StatelessWidget {
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.only(top: 15, left: 30, right: 30),
       child: Text(
-        '\$${product?.price.toString() ?? '0.0'}',
+        '\$${product?.price!.toStringAsFixed(2) ?? '0.0'}',
         style: const TextStyle(
             fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
       ),
@@ -88,7 +88,7 @@ class ClientProductsDetailPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => clientProductsDetailController.removeItem(product!, price, counter),
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     minimumSize: const Size(45,37),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -102,7 +102,7 @@ class ClientProductsDetailPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
+                  backgroundColor: Colors.white,
                   minimumSize: const Size(45,37),
                 ),
                 child: Text(
@@ -113,7 +113,7 @@ class ClientProductsDetailPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => clientProductsDetailController.addItem(product!, price, counter),
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     minimumSize: const Size(45,37),
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -128,14 +128,13 @@ class ClientProductsDetailPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => clientProductsDetailController.addToBag(product!, price, counter),
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.amber,
                     minimumSize: const Size(45,37),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)
                       )
                     ),
                 child: Text(
-                  'Agregar   \$${price.value}',
+                  'Agregar   \$${price.value.toStringAsFixed(2)}',
                   style: const TextStyle(color: Colors.black, fontSize: 15),
                 ),
               ),

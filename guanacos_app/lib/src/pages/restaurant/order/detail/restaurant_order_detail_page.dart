@@ -18,7 +18,7 @@ class RestaurantOrderDetailPage extends StatelessWidget {
       bottomNavigationBar: Container(
         height: restaurantController.order.status == 'PAGADO' ? 
         MediaQuery.of(context).size.height*0.70
-        : MediaQuery.of(context).size.height*0.70,
+        : MediaQuery.of(context).size.height*0.55,
         padding: const EdgeInsets.only(top: 15),
         child: Column(
           children: [
@@ -83,7 +83,7 @@ class RestaurantOrderDetailPage extends StatelessWidget {
 
   Widget _dataDate(){
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: ListTile(
         title: const Text('Fecha del pedido'),
         subtitle: Text(RelativeTimeUtil.getRelativeTime(restaurantController.order.createdDate ?? 0 )),
@@ -158,7 +158,7 @@ class RestaurantOrderDetailPage extends StatelessWidget {
             mainAxisAlignment: restaurantController.order.status == 'PAGADO'? MainAxisAlignment.center : MainAxisAlignment.start,
             children: [
                    Text(
-                    'Total: \$${restaurantController.order.total}',
+                    'Total: \$${(restaurantController.order.total)!.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18

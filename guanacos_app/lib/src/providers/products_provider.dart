@@ -50,7 +50,7 @@ class ProductsProvider extends GetConnect{
       }
     );
 
-     if(response.statusCode == 500 || response.statusCode == null) {
+     if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }
@@ -74,7 +74,7 @@ class ProductsProvider extends GetConnect{
       }
     );
 
-     if(response.statusCode == 500 || response.statusCode == null) {
+     if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

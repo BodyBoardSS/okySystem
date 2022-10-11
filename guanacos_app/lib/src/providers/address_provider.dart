@@ -20,7 +20,7 @@ class AddressProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500) {
+    if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return ResponseApi();
     }
@@ -39,7 +39,7 @@ class AddressProvider extends GetConnect{
       }
     );
 
-    if(response.statusCode == 500 || response.statusCode == null) {
+    if(response.statusCode == null || response.statusCode! >= 500) {
       Get.snackbar("Error", "Lo sentimos estamos teniendo algunos problemas.");
       return [];
     }

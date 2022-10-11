@@ -22,10 +22,14 @@ module.exports = {
 
         if (files)
             if (files.length > 0) {
-                const path = `image_${Date.now()}`;
-                const url = await storage(files[0], path)
-                if (url != undefined && url != null)
-                    image = url
+                try {
+                    const path = `image_${Date.now()}`;
+                    const url = await storage(files[0], path)
+                    if (url != undefined && url != null)
+                        image = url    
+                } catch (error) {
+                    console.log(`Ocurrio un error ${error}`)
+                }
             }
 
         await User.update({

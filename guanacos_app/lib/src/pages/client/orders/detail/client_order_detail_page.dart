@@ -9,17 +9,14 @@ import 'package:gunanacos_app/src/widgets/relative_time_util.dart';
 class ClientOrderDetailPage extends StatelessWidget {
   ClientOrderDetailPage({Key? key}) : super(key: key);
 
-  ClientOrderDetailController clientController =
-      Get.put(ClientOrderDetailController());
+  ClientOrderDetailController clientController = Get.put(ClientOrderDetailController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        height: clientController.order.status == 'EN CAMINO'
-        ? MediaQuery.of(context).size.height * 0.45
-        : MediaQuery.of(context).size.height * 0.35,
-        padding: const EdgeInsets.only(top: 15),
+        height: MediaQuery.of(context).size.height * 0.50,
+        padding: const EdgeInsets.only(top: 5),
         child: Column(
           children: [
             _dataDate(),
@@ -147,7 +144,7 @@ class ClientOrderDetailPage extends StatelessWidget {
                 : MainAxisAlignment.start,
             children: [
               Text(
-                'Total: \$${clientController.order.total}',
+                'Total: \$${(clientController.order.total)!.toStringAsFixed(2)}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
@@ -166,7 +163,7 @@ class ClientOrderDetailPage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 30),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(15), primary: Colors.amber),
+                padding: const EdgeInsets.all(15), backgroundColor: Colors.amber),
             onPressed: () => clientController.goToOrderMap(),
             child: const Text(
               'Rastrear Pedido',

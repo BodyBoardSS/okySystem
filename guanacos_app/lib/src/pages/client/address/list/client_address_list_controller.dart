@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -53,7 +55,7 @@ class ClientAddressListController extends GetxController{
     double totalC = 0.0;
 
     for (var product in products) {
-      totalC = totalC + (product.quantity! * product.price!);
+      totalC = roundDouble(totalC + (product.quantity! * product.price!),2);
     }
 
     Order order = Order(
@@ -72,5 +74,10 @@ class ClientAddressListController extends GetxController{
       GetStorage().remove('shoppinBag');
       Get.toNamed('/client/payments/create');
     }
+  }
+
+  double roundDouble(double value, int places){ 
+    num mod = pow(10.0, places); 
+    return ((value * mod).round().toDouble() / mod); 
   }
 }

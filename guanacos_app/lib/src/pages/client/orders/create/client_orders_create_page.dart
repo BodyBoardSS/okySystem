@@ -48,7 +48,7 @@ class ClientOrdersCreatePage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: Text(
-        '\$${product.price! * product.quantity!}',
+        '\$${(product.price! * product.quantity!).toStringAsFixed(2)}',
         style: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold
@@ -155,7 +155,7 @@ class ClientOrdersCreatePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                    Text(
-                    'Total: \$${orderController.total.value}',
+                    'Total: \$${orderController.total.value.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -32,7 +34,7 @@ class ClientOrdersCreateController extends GetxController{
   void getTotal(){
     total.value = 0.0;
     for (var product in lstProducts) {
-      total.value = total.value + (product.quantity! * product.price!);
+      total.value = roundDouble(total.value + (product.quantity! * product.price!),2);
     }
   }
 
@@ -84,4 +86,8 @@ class ClientOrdersCreateController extends GetxController{
     }
   }
 
+  double roundDouble(double value, int places){ 
+    num mod = pow(10.0, places); 
+    return ((value * mod).round().toDouble() / mod); 
+  }
 }

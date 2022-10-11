@@ -1,11 +1,12 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gunanacos_app/src/models/user.dart';
 import 'package:gunanacos_app/src/providers/user_provider.dart';
 
 class PushNotificationsProvider {
 
-  AndroidNotificationChannel channel = AndroidNotificationChannel(
+  AndroidNotificationChannel channel = const AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
     importance: Importance.high,
@@ -34,7 +35,9 @@ class PushNotificationsProvider {
         .getInitialMessage()
         .then((RemoteMessage? message) {
       if (message != null) {
-        print('NUEVA NOTIFICACION');
+        if (kDebugMode) {
+          print('NUEVA NOTIFICACION');
+        }
       }
     });
     // PRIMER PLANO
@@ -43,7 +46,9 @@ class PushNotificationsProvider {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
+      if (kDebugMode) {
+        print('A new onMessageOpenedApp event was published!');
+      }
     });
   }
 
