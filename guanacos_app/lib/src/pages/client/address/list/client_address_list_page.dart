@@ -139,7 +139,7 @@ class ClientAddressListPage extends StatelessWidget {
       height: 50,
       margin:const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       child: ElevatedButton(
-          onPressed: () => addressController.createOrder(),
+          onPressed: () => addressController.goToPaymentsCreate(),
           style: ElevatedButton.styleFrom(
               padding:const EdgeInsets.symmetric(vertical: 15)),
           child:const Text(

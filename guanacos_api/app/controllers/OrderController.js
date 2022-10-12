@@ -9,14 +9,14 @@ module.exports = {
 
     async create(req, res) {
         await Order.create({
-            lat: req.body.total,
+            lat: req.body.lat,
             lng: req.body.lng,
             status: req.body.status,
             createdDate: Date.now(),
             total:req.body.total,
             idclient: req.body.idclient,
             idaddress: req.body.idaddress
-        }).then(order => {
+        }).then(async order => {
     
             for (var key in req.body.detail) {
                 if (req.body.detail.hasOwnProperty(key)) {
@@ -30,6 +30,32 @@ module.exports = {
                         console.log(`Se ha producido un error: ${err}`);
                     });
                 }
+            }
+
+            let users = await User.findAll({
+                where:{
+                    id:1
+                }
+            })
+            
+            try {
+                if(users !== undefined && users != null){
+                    if(users.length > 0){
+                        let tokens = []
+                        users.forEach(u => {
+                            tokens.push(u.notificationToken)
+                            console.log(`Token: ${u.notificationToken}`)
+                        });
+                        
+                        PushNotificationController.sendNotificationMultipleDevices(tokens,{
+                            title:'Compra Realizada',
+                            body:'Un cliente ha realizado una compra.',
+                            id_notification:'2'
+                        })
+                    }
+                }   
+            } catch (error) {
+                console.log(`Ocurrio un error al intentar enviar notificaciones: ${error}`)
             }
 
             res.status(201).json({
@@ -60,24 +86,17 @@ module.exports = {
                 where: { id: id }
             }
         ).then(async function () {
-            var titleNoti =''
-            var textBody =''
-            var tokeNoti=''
             if(req.body.status !== undefined){
                 if(req.body.status === 'DESPACHADO'){
                     let user = await User.findByPk(req.body.iddelivery);
                     if(user !== undefined && user != null){
-                        titleNoti = 'Pedido Asignado'
-                        textBody='Se le ha asignado un pedido para ser entregado.'
-                        tokeNoti=user.notificationToken
+                        PushNotificationController.sendNotification(tokeuser.notificationTokenNoti,{
+                            title:'Pedido Asignado',
+                            body:'Se le ha asignado un pedido para ser entregado.',
+                            id_notification:'1'
+                        })
                     }
                 }
-
-                PushNotificationController.sendNotification(tokeNoti,{
-                    title:titleNoti,
-                    body:textBody,
-                    id_notification:'1'
-                })
             }
 
             res.status(201).json({
