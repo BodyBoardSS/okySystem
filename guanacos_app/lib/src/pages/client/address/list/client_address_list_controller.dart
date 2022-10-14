@@ -1,9 +1,9 @@
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/address.dart';
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/providers/address_provider.dart';
+import 'package:guanacos_app/src/models/address.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/providers/address_provider.dart';
 
 class ClientAddressListController extends GetxController{
 

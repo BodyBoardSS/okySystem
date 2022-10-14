@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
 
 class ClientOrdersCreateController extends GetxController{
 

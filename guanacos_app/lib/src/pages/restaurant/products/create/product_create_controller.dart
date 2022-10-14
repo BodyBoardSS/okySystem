@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/category.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/providers/categories_provider.dart';
-import 'package:gunanacos_app/src/providers/products_provider.dart';
+import 'package:guanacos_app/src/models/category.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/providers/categories_provider.dart';
+import 'package:guanacos_app/src/providers/products_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 

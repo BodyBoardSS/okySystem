@@ -5,32 +5,32 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/pages/client/address/create/client_address_create_page.dart';
-import 'package:gunanacos_app/src/pages/client/address/list/client_address_list_page.dart';
-import 'package:gunanacos_app/src/pages/client/home/client_home_page.dart';
-import 'package:gunanacos_app/src/pages/client/orders/create/client_orders_create_page.dart';
-import 'package:gunanacos_app/src/pages/client/orders/detail/client_order_detail_page.dart';
-import 'package:gunanacos_app/src/pages/client/orders/map/client_orders_map_page.dart';
-import 'package:gunanacos_app/src/pages/client/payments/create/client_payments_create_page.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/pages/client/address/create/client_address_create_page.dart';
+import 'package:guanacos_app/src/pages/client/address/list/client_address_list_page.dart';
+import 'package:guanacos_app/src/pages/client/home/client_home_page.dart';
+import 'package:guanacos_app/src/pages/client/orders/create/client_orders_create_page.dart';
+import 'package:guanacos_app/src/pages/client/orders/detail/client_order_detail_page.dart';
+import 'package:guanacos_app/src/pages/client/orders/map/client_orders_map_page.dart';
+import 'package:guanacos_app/src/pages/client/payments/create/client_payments_create_page.dart';
 
-import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
-import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
-import 'package:gunanacos_app/src/pages/delivery/home/delivery_home_page.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/detail/delivery_order_detail_page.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/map/delivery_orders_map_page.dart';
-import 'package:gunanacos_app/src/pages/home/home_page.dart';
-import 'package:gunanacos_app/src/pages/login/login_page.dart';
-import 'package:gunanacos_app/src/pages/client/profile/profile_info_update_page.dart';
-import 'package:gunanacos_app/src/pages/register/register_page.dart';
-import 'package:gunanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
-import 'package:gunanacos_app/src/pages/restaurant/home/restaurant_home_page.dart';
-import 'package:gunanacos_app/src/pages/restaurant/order/detail/restaurant_order_detail_page.dart';
-import 'package:gunanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
-import 'package:gunanacos_app/src/pages/roles/roles_page.dart';
-import 'package:gunanacos_app/src/providers/push_notifications_provider.dart';
-import 'package:gunanacos_app/src/widgets/firebase_config.dart';
+import 'package:guanacos_app/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:guanacos_app/src/pages/client/profile/profile_info_page.dart';
+import 'package:guanacos_app/src/pages/delivery/home/delivery_home_page.dart';
+import 'package:guanacos_app/src/pages/delivery/orders/detail/delivery_order_detail_page.dart';
+import 'package:guanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
+import 'package:guanacos_app/src/pages/delivery/orders/map/delivery_orders_map_page.dart';
+import 'package:guanacos_app/src/pages/home/home_page.dart';
+import 'package:guanacos_app/src/pages/login/login_page.dart';
+import 'package:guanacos_app/src/pages/client/profile/profile_info_update_page.dart';
+import 'package:guanacos_app/src/pages/register/register_page.dart';
+import 'package:guanacos_app/src/pages/restaurant/categories/create/category_create_page.dart';
+import 'package:guanacos_app/src/pages/restaurant/home/restaurant_home_page.dart';
+import 'package:guanacos_app/src/pages/restaurant/order/detail/restaurant_order_detail_page.dart';
+import 'package:guanacos_app/src/pages/restaurant/order/list/restaurant_orders_list_page.dart';
+import 'package:guanacos_app/src/pages/roles/roles_page.dart';
+import 'package:guanacos_app/src/providers/push_notifications_provider.dart';
+import 'package:guanacos_app/src/widgets/firebase_config.dart';
 
 User uSession = User.fromJson(GetStorage().read('user') ?? {});
 
@@ -74,7 +74,6 @@ class _MyAppState extends State<MyApp> {
       getPages: [
           GetPage(name: '/', page: () => LoginPage()),
           GetPage(name: '/register', page: () => const RegisterPage()),
-          GetPage(name: '/home', page: () => HomePage()),
           GetPage(name: '/roles', page: () => RolesPage()),
           GetPage(name: '/restaurant/order/list', page: () => RestaurantOrdersListPage()),
           GetPage(name: '/restaurant/order/detail', page: () => RestaurantOrderDetailPage()),

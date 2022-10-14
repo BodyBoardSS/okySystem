@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gunanacos_app/src/pages/restaurant/products/create/form_create.dart';
+import 'package:guanacos_app/src/pages/restaurant/products/create/form_create.dart';
 
-import 'package:gunanacos_app/src/widgets/background_app.dart';
+import 'package:guanacos_app/src/widgets/background_app.dart';
 
 class ProductCreatePage extends StatelessWidget {
   const ProductCreatePage({Key? key}) : super(key: key);

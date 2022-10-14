@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:gunanacos_app/src/pages/login/login_controller.dart';
+import 'package:guanacos_app/src/pages/login/login_controller.dart';
 
-import 'package:gunanacos_app/src/widgets/background.dart';
-import 'package:gunanacos_app/src/pages/login/form_login.dart';
-import 'package:gunanacos_app/src/widgets/title_page.dart';
+import 'package:guanacos_app/src/widgets/background.dart';
+import 'package:guanacos_app/src/pages/login/form_login.dart';
+import 'package:guanacos_app/src/widgets/title_page.dart';
 
 // ignore: must_be_immutable
 class LoginPage extends StatelessWidget {

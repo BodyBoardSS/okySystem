@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/pages/client/home/client_home_controller.dart';
-import 'package:gunanacos_app/src/pages/client/orders/list/client_orders_list_page.dart';
-import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:guanacos_app/src/pages/client/home/client_home_controller.dart';
+import 'package:guanacos_app/src/pages/client/orders/list/client_orders_list_page.dart';
+import 'package:guanacos_app/src/pages/client/products/list/client_products_list_page.dart';
 
-import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
-import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
+import 'package:guanacos_app/src/pages/client/profile/profile_info_page.dart';
+import 'package:guanacos_app/src/widgets/custom_animated_bottom_bar.dart';
 
 // ignore: must_be_immutable
 class ClientHomePage extends StatelessWidget {

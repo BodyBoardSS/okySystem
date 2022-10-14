@@ -1,10 +1,10 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/order.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/providers/orders_provider.dart';
-import 'package:gunanacos_app/src/providers/user_provider.dart';
+import 'package:guanacos_app/src/models/order.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/providers/orders_provider.dart';
+import 'package:guanacos_app/src/providers/user_provider.dart';
 
 class DeliveryOrderDetailController extends GetxController{
   Order order = Order.fromJson(Get.arguments['order']);

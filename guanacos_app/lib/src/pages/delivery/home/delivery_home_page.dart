@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:gunanacos_app/src/pages/client/profile/profile_info_page.dart';
-import 'package:gunanacos_app/src/pages/delivery/home/delivery_home_controller.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
-import 'package:gunanacos_app/src/widgets/custom_animated_bottom_bar.dart';
+import 'package:guanacos_app/src/pages/client/profile/profile_info_page.dart';
+import 'package:guanacos_app/src/pages/delivery/home/delivery_home_controller.dart';
+import 'package:guanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
+import 'package:guanacos_app/src/widgets/custom_animated_bottom_bar.dart';
 
 // ignore: must_be_immutable
 class DeliveryHomePage extends StatelessWidget {

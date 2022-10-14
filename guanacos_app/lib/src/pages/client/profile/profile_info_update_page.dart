@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/pages/client/profile/profile_info_update_controller.dart';
-import 'package:gunanacos_app/src/widgets/background_profile.dart';
+import 'package:guanacos_app/src/pages/client/profile/profile_info_update_controller.dart';
+import 'package:guanacos_app/src/widgets/background_profile.dart';
 
 // ignore: must_be_immutable
 class ProfileUpdatePage extends StatelessWidget {

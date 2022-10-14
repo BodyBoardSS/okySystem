@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/address.dart';
-import 'package:gunanacos_app/src/models/order.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/providers/orders_provider.dart';
+import 'package:guanacos_app/src/models/address.dart';
+import 'package:guanacos_app/src/models/order.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/providers/orders_provider.dart';
 
 class ClientPaymentsCreateController extends GetxController {
   User user = User.fromJson(GetStorage().read('user') ?? {});

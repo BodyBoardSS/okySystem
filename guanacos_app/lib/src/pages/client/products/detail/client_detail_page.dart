@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/pages/client/products/detail/client_products_detail_controller.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/pages/client/products/detail/client_products_detail_controller.dart';
 
 // ignore: must_be_immutable
 class ClientProductsDetailPage extends StatelessWidget {

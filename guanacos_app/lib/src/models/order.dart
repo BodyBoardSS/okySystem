@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:gunanacos_app/src/models/address.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/models/address.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/models/user.dart';
 
 Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 

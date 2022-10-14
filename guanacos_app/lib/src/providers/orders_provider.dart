@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/environment/environment.dart';
-import 'package:gunanacos_app/src/models/order.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/environment/environment.dart';
+import 'package:guanacos_app/src/models/order.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/models/user.dart';
 
 class OrdersProvider extends GetConnect{
   String url = "${Environment.apiUrl}api";

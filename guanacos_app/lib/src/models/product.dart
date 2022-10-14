@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:gunanacos_app/src/models/order_detail.dart';
+import 'package:guanacos_app/src/models/order_detail.dart';
 
 Product productFromJson(String str) => Product.fromJson(json.decode(str));
 

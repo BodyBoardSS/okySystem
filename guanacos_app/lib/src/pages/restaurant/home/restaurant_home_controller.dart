@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/providers/push_notifications_provider.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/providers/push_notifications_provider.dart';
 
 class RestaurantHomeController extends GetxController{
 

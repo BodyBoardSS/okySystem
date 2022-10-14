@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:gunanacos_app/src/models/rol.dart';
+import 'package:guanacos_app/src/models/rol.dart';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 

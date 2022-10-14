@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/pages/delivery/orders/detail/delivery_order_detail_controller.dart';
-import 'package:gunanacos_app/src/widgets/no_data_widget.dart';
-import 'package:gunanacos_app/src/widgets/relative_time_util.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/pages/delivery/orders/detail/delivery_order_detail_controller.dart';
+import 'package:guanacos_app/src/widgets/no_data_widget.dart';
+import 'package:guanacos_app/src/widgets/relative_time_util.dart';
 
 // ignore: must_be_immutable
 class DeliveryOrderDetailPage extends StatelessWidget {

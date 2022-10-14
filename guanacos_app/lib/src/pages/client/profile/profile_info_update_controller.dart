@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/pages/client/profile/profile_info_controller.dart';
-import 'package:gunanacos_app/src/providers/user_provider.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/pages/client/profile/profile_info_controller.dart';
+import 'package:guanacos_app/src/providers/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 

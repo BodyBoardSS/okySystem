@@ -8,10 +8,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:gunanacos_app/src/environment/environment.dart';
-import 'package:gunanacos_app/src/models/order.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/providers/orders_provider.dart';
+import 'package:guanacos_app/src/environment/environment.dart';
+import 'package:guanacos_app/src/models/order.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/providers/orders_provider.dart';
 import 'package:location/location.dart' as location;
 import 'package:socket_io_client/socket_io_client.dart';
 

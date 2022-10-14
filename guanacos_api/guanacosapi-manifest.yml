@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guanacos-api
+spec:
+  selector:
+    matchLabels:
+      app: guanacos-api
+  template:
+    metadata:
+      labels:
+        app: guanacos-api
+    spec:
+      containers:
+      - name: guanacos-api
+        image: bodyboardss/guanacos_api:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: guanacosapi-svc
+  labels:
+    deployment: guanacos-api
+spec:
+  selector:
+    app: guanacos-api
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3001
+    nodePort: 31110

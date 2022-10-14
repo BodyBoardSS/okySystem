@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/category.dart';
-import 'package:gunanacos_app/src/pages/restaurant/products/create/product_create_controller.dart';
+import 'package:guanacos_app/src/models/category.dart';
+import 'package:guanacos_app/src/pages/restaurant/products/create/product_create_controller.dart';
 
 // ignore: must_be_immutable
 class FormCreate extends StatelessWidget {

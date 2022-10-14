@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/category.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/pages/client/products/detail/client_detail_page.dart';
-import 'package:gunanacos_app/src/providers/categories_provider.dart';
-import 'package:gunanacos_app/src/providers/products_provider.dart';
+import 'package:guanacos_app/src/models/category.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/pages/client/products/detail/client_detail_page.dart';
+import 'package:guanacos_app/src/providers/categories_provider.dart';
+import 'package:guanacos_app/src/providers/products_provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ClientProductsListController extends GetxController{

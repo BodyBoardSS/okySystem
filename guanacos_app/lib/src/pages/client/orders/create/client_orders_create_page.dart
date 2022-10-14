@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/product.dart';
-import 'package:gunanacos_app/src/pages/client/orders/create/client_orders_create_controller.dart';
-import 'package:gunanacos_app/src/widgets/no_data_widget.dart';
+import 'package:guanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/pages/client/orders/create/client_orders_create_controller.dart';
+import 'package:guanacos_app/src/widgets/no_data_widget.dart';
 
 // ignore: must_be_immutable
 class ClientOrdersCreatePage extends StatelessWidget {

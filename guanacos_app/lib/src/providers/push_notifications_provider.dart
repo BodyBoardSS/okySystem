@@ -1,8 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:gunanacos_app/src/models/user.dart';
-import 'package:gunanacos_app/src/providers/user_provider.dart';
+import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/providers/user_provider.dart';
 
 class PushNotificationsProvider {
 

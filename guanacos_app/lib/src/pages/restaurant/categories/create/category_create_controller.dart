@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/category.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
-import 'package:gunanacos_app/src/providers/categories_provider.dart';
+import 'package:guanacos_app/src/models/category.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/providers/categories_provider.dart';
 
 class CategoryCreateController extends GetxController {
 

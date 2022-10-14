@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/rol.dart';
-import 'package:gunanacos_app/src/pages/roles/roles_contoller.dart';
-import 'package:gunanacos_app/src/widgets/background_app.dart';
+import 'package:guanacos_app/src/models/rol.dart';
+import 'package:guanacos_app/src/pages/roles/roles_contoller.dart';
+import 'package:guanacos_app/src/widgets/background_app.dart';
 
 // ignore: must_be_immutable
 class RolesPage extends StatelessWidget {

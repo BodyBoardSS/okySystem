@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gunanacos_app/src/pages/restaurant/categories/create/form_create.dart';
-import 'package:gunanacos_app/src/widgets/background_app.dart';
+import 'package:guanacos_app/src/pages/restaurant/categories/create/form_create.dart';
+import 'package:guanacos_app/src/widgets/background_app.dart';
 
 class CategoryCreatePage extends StatelessWidget {
   const CategoryCreatePage({Key? key}) : super(key: key);

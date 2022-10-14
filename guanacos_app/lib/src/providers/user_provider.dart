@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:gunanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/models/user.dart';
 import 'package:http/http.dart' as http;
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
 
-import 'package:gunanacos_app/src/environment/environment.dart';
-import 'package:gunanacos_app/src/models/response_api.dart';
+import 'package:guanacos_app/src/environment/environment.dart';
+import 'package:guanacos_app/src/models/response_api.dart';
 
 
 

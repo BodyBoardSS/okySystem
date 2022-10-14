@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/pages/client/payments/create/client_payments_create_controller.dart';
+import 'package:guanacos_app/src/pages/client/payments/create/client_payments_create_controller.dart';
 
 // ignore: must_be_immutable
 class ClientPaymentsCreatePage extends StatelessWidget {

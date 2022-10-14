@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/order.dart';
-import 'package:gunanacos_app/src/providers/orders_provider.dart';
+import 'package:guanacos_app/src/models/order.dart';
+import 'package:guanacos_app/src/providers/orders_provider.dart';
 
 class RestaurantOrdersListController extends GetxController {
   

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/models/category.dart';
-import 'package:gunanacos_app/src/models/product.dart';
+import 'package:guanacos_app/src/models/category.dart';
+import 'package:guanacos_app/src/models/product.dart';
 
-import 'package:gunanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
-import 'package:gunanacos_app/src/widgets/no_data_widget.dart';
+import 'package:guanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
+import 'package:guanacos_app/src/widgets/no_data_widget.dart';
 
 // ignore: must_be_immutable
 class ClientProductsListPage extends StatelessWidget {

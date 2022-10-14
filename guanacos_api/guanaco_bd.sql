@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2022 at 11:49 PM
+-- Generation Time: Oct 01, 2022 at 08:45 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -43,8 +43,8 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ID`, `USERID`, `ADDRESS`, `NEIGHBORHOOD`, `LAT`, `LNG`, `CREATEDAT`, `UPDATEDAT`) VALUES
-(3, 1, 'Casa Gabiie', 'Condominio San Jacinto', 13.682421829368469, -89.19056430459023, '2022-10-03 16:12:38', '2022-10-03 16:12:38'),
-(4, 1, 'Urb. Nuevo Lourdes', 'Colon', 13.723855375884403, -89.38042547553778, '2022-10-06 05:07:00', '2022-10-06 05:07:00');
+(1, 1, 'prueba', 'prueba', 13.6817911, -89.1922692, '2022-09-30 03:26:30', '2022-09-30 03:26:30'),
+(2, 1, 'prueba2', 'prueba2', 13.6817911, -89.1922692, '2022-10-01 05:59:26', '2022-10-01 05:59:26');
 
 -- --------------------------------------------------------
 
@@ -84,18 +84,8 @@ CREATE TABLE `orders` (
   `STATUS` varchar(90) NOT NULL,
   `CREATEDDATE` bigint(20) NOT NULL,
   `CREATEDAT` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `UPDATEDAT` timestamp NOT NULL DEFAULT current_timestamp(),
-  `TOTAL` double DEFAULT NULL
+  `UPDATEDAT` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`ID`, `IDCLIENT`, `IDDELIVERY`, `IDADDRESS`, `LAT`, `LNG`, `STATUS`, `CREATEDDATE`, `CREATEDAT`, `UPDATEDAT`, `TOTAL`) VALUES
-(7, 1, 1, 3, 13.682421829368469, -89.19056430459023, 'DESPACHADO', 20221003, '2022-10-06 23:22:52', '2022-10-06 23:22:52', 1.25),
-(9, 1, 4, 3, 13.7235505, -89.3803261, 'EN CAMINO', 1665033029477, '2022-10-08 06:35:20', '2022-10-08 06:35:20', 2.25),
-(10, 1, NULL, 3, NULL, NULL, 'PAGADO', 1665100248071, '2022-10-06 23:50:48', '2022-10-06 23:50:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -110,17 +100,6 @@ CREATE TABLE `order_detail` (
   `CREATEDAT` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `UPDATEDAT` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order_detail`
---
-
-INSERT INTO `order_detail` (`IDORDER`, `IDPRODUCT`, `QUANTITY`, `CREATEDAT`, `UPDATEDAT`) VALUES
-(7, 1, 2, '2022-10-03 23:20:13', '2022-10-03 23:20:13'),
-(9, 1, 3, '2022-10-06 05:10:29', '2022-10-06 05:10:29'),
-(9, 2, 9, '2022-10-06 05:10:29', '2022-10-06 05:10:29'),
-(10, 1, 8, '2022-10-06 23:50:48', '2022-10-06 23:50:48'),
-(10, 2, 25, '2022-10-06 23:50:48', '2022-10-06 23:50:48');
 
 -- --------------------------------------------------------
 
@@ -207,14 +186,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `EMAIL`, `NAME`, `LASTNAME`, `PHONE`, `IMAGE`, `PASSWORD`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 'k@k.com', 'Manuel', 'Orellana', '78343538', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663222962280?alt=media&token=1a3f1ab3-ea61-451a-8e98-47d075d9d8d5', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:45:55', '2022-10-06 22:45:55'),
-(3, 'g@g.com', 'Gabriela', 'Guzman', '78343534', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663219144315?alt=media&token=8f5eba1f-4653-463f-a12f-3b30c4410a48', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11'),
-(4, 'ga@ga.com', 'Gabriel', 'Guzman', '78343535', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663219144315?alt=media&token=8f5eba1f-4653-463f-a12f-3b30c4410a48', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11'),
-(6, 'lz@lz.com', 'Lissette', 'Guzman', '78343536', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663223135986?alt=media&token=1a3f1ab3-ea61-451a-8e98-47d075d9d8d5', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11'),
-(25, 'javierlo@gmail.com', 'Antonio', 'Lopez', '78436261', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663218785922?alt=media&token=8f5eba1f-4653-463f-a12f-3b30c4410a48', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11'),
-(26, 'gorellana@gmail.com', 'Gabriel', 'Orellana', '78436263', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663218785922?alt=media&token=8f5eba1f-4653-463f-a12f-3b30c4410a48', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11'),
-(27, 'test@gmail.com', 'test', 'test', '78453695', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/image_1663218785922?alt=media&token=8f5eba1f-4653-463f-a12f-3b30c4410a48', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11'),
-(28, 'ko200596@gmail.com', 'Kevin', 'Orellana', '78451236', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/KevinOrellana.jpg?alt=media&token=caedc065-ff17-407e-aebe-2c3c4a4944cd', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-10-06 22:46:11', '2022-10-06 22:46:11');
+(1, 'k@k.com', 'Manuel', 'Orellana', '78343538', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/KevinOrellana.jpg?alt=media&token=caedc065-ff17-407e-aebe-2c3c4a4944cd', '$2a$08$T9JylWUDm2vGBP7599pr5uZzZ72Z7.tgSloeak75JH1AKNvVefIkq', '2022-09-14 21:39:21', '2022-09-14 21:39:21'),
+(3, 'g@g.com', 'Gabriela', 'Guzman', '78343534', 'https://firebasestorage.googleapis.com/v0/b/guanacos-app.appspot.com/o/image_1661812935084?alt=media&token=40a1d9ca-7489-41e3-acc0-58f2470ae34b', '$2a$08$QiYMkZYmMf17qIDrQ0KAuO66DKnQlqmMRlVOB2q3NB1ej/uSV3RZi', '2022-08-29 22:47:25', '2022-08-29 22:47:25'),
+(4, 'ga@ga.com', 'Gabriel', 'Guzman', '78343535', 'https://firebasestorage.googleapis.com/v0/b/guanacos-app.appspot.com/o/image_1661812935084?alt=media&token=40a1d9ca-7489-41e3-acc0-58f2470ae34b', '$2a$10$7ek/pDw/NCraarTGDBwxNOJRXDHd5DdYWSURaOZZeY02YeVBPG6lO', '2022-08-29 22:47:25', '2022-08-29 22:47:25'),
+(6, 'lz@lz.com', 'Lissette', 'Guzman', '78343536', 'https://firebasestorage.googleapis.com/v0/b/guanacos-app.appspot.com/o/image_1661812935084?alt=media&token=40a1d9ca-7489-41e3-acc0-58f2470ae34b', '$2a$10$JSgTZ0N81XEKIlJlTwAEauyWB6tld.vZgFPmCkMGwpUInJa0rqSUe', '2022-08-29 22:47:25', '2022-08-29 22:47:25'),
+(25, 'javierlo@gmail.com', 'Antonio', 'Lopez', '78436261', 'https://firebasestorage.googleapis.com/v0/b/guanacos-app.appspot.com/o/image_1661813518622?alt=media&token=871efbe7-b61c-41e5-90be-0f360006bdf8', '$2b$10$/V.hFx6N9GWaCeYi43UMOeuwzpNNtXfrdToybtE/zkUhX8nYZidoe', '2022-08-29 22:51:59', '2022-08-29 22:51:59'),
+(26, 'gorellana@gmail.com', 'Gabriel', 'Orellana', '78436263', '', '$2b$10$1Uz0z331L4ql4OCfel6nweQQDa740VnQFaGz8uS86wfwQHm0Wjm9y', '2022-09-08 02:17:58', '2022-09-08 02:17:58'),
+(27, 'test@gmail.com', 'test', 'test', '78453695', 'https://firebasestorage.googleapis.com/v0/b/guanacos-app.appspot.com/o/image_1662604834720?alt=media&token=89a4578e-873d-4bc4-8e35-27d785414731', '$2b$10$WfqlREAjU2I2eVMHs1uLquMZM6cSIu2G5wuRggIGw35jsgnqmw3x6', '2022-09-08 02:40:42', '2022-09-08 02:40:42'),
+(28, 'ko200596@gmail.com', 'Kevin', 'Orellana', '78451236', 'https://firebasestorage.googleapis.com/v0/b/guanacosapp.appspot.com/o/KevinOrellana.jpg?alt=media&token=caedc065-ff17-407e-aebe-2c3c4a4944cd', '$2b$10$IxCUzIYSC2A.LiiTrDy6NuJeYYYjqq8Q.JbH.NjRbRGcws21sR9dy', '2022-09-09 20:51:46', '2022-09-09 20:51:46');
 
 -- --------------------------------------------------------
 
@@ -236,14 +215,13 @@ CREATE TABLE `user_rol` (
 
 INSERT INTO `user_rol` (`ID`, `IDROL`, `IDUSER`, `CREATEDAT`, `UPDATEDAT`) VALUES
 (1, 1, 1, '2022-06-23 11:30:41', '2022-06-23 11:30:41'),
-(2, 3, 3, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
-(3, 3, 4, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
-(4, 3, 6, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
+(2, 2, 3, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
+(3, 2, 4, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
+(4, 2, 6, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
 (5, 2, 1, '2022-06-23 11:32:54', '2022-06-23 11:32:54'),
 (6, 2, 25, '2022-08-29 22:51:59', '2022-08-29 22:51:59'),
 (8, 2, 27, '2022-09-08 02:40:42', '2022-09-08 02:40:42'),
-(9, 2, 28, '2022-09-08 21:26:01', '2022-09-08 21:26:01'),
-(10, 2, 4, '2022-09-08 21:26:01', '2022-09-08 21:26:01');
+(9, 2, 28, '2022-09-08 21:26:01', '2022-09-08 21:26:01');
 
 --
 -- Indexes for dumped tables
@@ -321,7 +299,7 @@ ALTER TABLE `user_rol`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -333,7 +311,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment_method`
@@ -363,7 +341,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_rol`
 --
 ALTER TABLE `user_rol`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

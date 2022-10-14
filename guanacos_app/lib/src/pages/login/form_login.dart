@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gunanacos_app/src/pages/login/login_controller.dart';
+import 'package:guanacos_app/src/pages/login/login_controller.dart';
 
 // ignore: must_be_immutable
 class FormLogin extends StatelessWidget {
