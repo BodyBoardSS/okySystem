@@ -1,31 +1,72 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: guanacos-api
+  name: guanacos-api-deployment
+  namespace: default
+  labels:
+    app: guanacos-api
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: guanacos-api
   template:
-    metadata:
+    metadata: 
       labels:
         app: guanacos-api
     spec:
+      serviceAccountName: ksa-cloud-sql
+      nodeSelector:
+        iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
       - name: guanacos-api
         image: bodyboardss/guanacos_api:latest
         resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        limits:
+          memory: 512Mi
+          cpu: "1"
         ports:
         - containerPort: 3001
-
+        env:
+        - name: PORT
+          value: "3001"
+        - name: DB_HOST
+          value: "127.0.0.1"
+        - name: DB_PORT
+          value: "3306"
+        - name: AUTH_SECRET
+          value: "guanacoApp"
+        - name: AUTH_EXPIRES
+          value: "1h"
+        - name: AUTH_ROUNDS
+          value: "10"
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: gke-cloud-sql-secrets
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: gke-cloud-sql-secrets
+              key: password
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: gke-cloud-sql-secrets
+              key: database
+      - name: cloud-sql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:latest
+        command:
+          - "/cloud_sql_proxy"
+          - "-instances=dev-truth-366803:us-central1:guanacosbd=tcp:0.0.0.0:3306"
+        securityContext:
+          runAsNonRoot: true
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: guanacosapi-svc
+  name: guanacosapi-service
   labels:
     deployment: guanacos-api
 spec:
@@ -36,4 +77,4 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 3001
-    nodePort: 31110
+    nodePort: 31115
