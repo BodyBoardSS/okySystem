@@ -25,6 +25,9 @@ class RegisterController extends GetxController{
   ImagePicker imgPicker = ImagePicker();
   File? imgFile;
   
+  var isPasswordHidden = true.obs;
+  var isPasswordConfirmHidden = true.obs;
+
   void goToRegisterPage() {
     Get.toNamed('/register');
   }
@@ -90,6 +93,11 @@ class RegisterController extends GetxController{
       return false;
     }
 
+    if(!RegExp(r'^[a-z A-Z]+$').hasMatch(name) || !RegExp(r'^[a-z A-Z]+$').hasMatch(lastName)) {
+      Get.snackbar("Datos fallidos", 'El nombre y apellido solo debe contener letras.');
+      return false;
+    }
+
     if(phone.isEmpty) {
       Get.snackbar("Datos fallidos", 'Debe ingresar un teléfono');
       return false;
@@ -109,6 +117,7 @@ class RegisterController extends GetxController{
       Get.snackbar("Datos fallidos", 'Contraseñas no coinciden');
       return false;
     }
+
     if(imgFile == null) {
       Get.snackbar("Alerta", 'Se debe seleccionar una imagen de perfil');
       return false;
@@ -123,7 +132,14 @@ class RegisterController extends GetxController{
           Get.back();
           selectImage(ImageSource.gallery);
         },
-        child: const Text('Gallery')
+        child: const Text(
+          'Galería',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.bold
+          ),
+        )
     );
 
     Widget cameraButton = ElevatedButton(
@@ -131,7 +147,14 @@ class RegisterController extends GetxController{
           Get.back();
           selectImage(ImageSource.camera);
         },
-        child: const Text('Camera')
+        child: const Text(
+          'Camara',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.bold
+          )
+        )
     );
 
     AlertDialog alertDialog = AlertDialog(

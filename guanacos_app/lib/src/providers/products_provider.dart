@@ -17,7 +17,7 @@ class ProductsProvider extends GetConnect{
   String url = "${Environment.apiUrl}api";
 
   Future<Stream> create(Product product, List<File> images) async{
-    Uri uri = Uri.https(Environment.apiUrlOld, '/api/products');
+    Uri uri = Uri.http(Environment.apiUrlOld, '/api/products');
 
     final request = http.MultipartRequest('POST', uri);
 

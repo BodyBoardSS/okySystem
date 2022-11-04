@@ -9,7 +9,7 @@ class ProfileInfoController extends GetxController{
 
   ProfileInfoController(){
      // ignore: prefer_is_empty
-     if( user.value.roles!.isNotEmpty && user.value.roles!.length >= 1) {
+     if( user.value.roles!.isNotEmpty && user.value.roles!.length > 1) {
       options.add('Roles');
     }
   }

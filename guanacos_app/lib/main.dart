@@ -20,7 +20,6 @@ import 'package:guanacos_app/src/pages/delivery/home/delivery_home_page.dart';
 import 'package:guanacos_app/src/pages/delivery/orders/detail/delivery_order_detail_page.dart';
 import 'package:guanacos_app/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 import 'package:guanacos_app/src/pages/delivery/orders/map/delivery_orders_map_page.dart';
-import 'package:guanacos_app/src/pages/home/home_page.dart';
 import 'package:guanacos_app/src/pages/login/login_page.dart';
 import 'package:guanacos_app/src/pages/client/profile/profile_info_update_page.dart';
 import 'package:guanacos_app/src/pages/register/register_page.dart';

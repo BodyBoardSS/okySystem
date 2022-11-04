@@ -144,7 +144,7 @@ class ProfileUpdatePage extends StatelessWidget {
                   ? FileImage(updateUserController.imgFile!)
                   :updateUserController.user.image != null ?
                     NetworkImage(updateUserController.user.image!) :
-                   const AssetImage('assets/img/user_profile.png')
+                   const AssetImage('assets/img/user_profile_plus.png')
                       as ImageProvider,
               radius: 60,
               backgroundColor: Colors.amber,

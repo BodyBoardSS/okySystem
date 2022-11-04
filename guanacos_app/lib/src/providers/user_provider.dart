@@ -31,7 +31,7 @@ class UserProvider extends GetConnect {
   }
 
   Future<Stream> createWithImage(User user, File img) async{
-    Uri uri = Uri.https(Environment.apiUrlOld, '/api/signUpWithImage');
+    Uri uri = Uri.http(Environment.apiUrlOld, '/api/signUpWithImage');
 
     final request = http.MultipartRequest('POST', uri);
     request.files.add(http.MultipartFile(
@@ -49,7 +49,7 @@ class UserProvider extends GetConnect {
   }
 
   Future<Stream> updateWithImage(User user, File img) async{
-    Uri uri = Uri.https(Environment.apiUrlOld, '/api/users/updateWithImage');
+    Uri uri = Uri.http(Environment.apiUrlOld, '/api/users/updateWithImage');
     final request = http.MultipartRequest('PUT', uri);
     request.headers['Authorization'] = user.sessionToken ?? '';
     request.files.add(http.MultipartFile(

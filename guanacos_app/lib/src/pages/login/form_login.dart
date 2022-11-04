@@ -57,15 +57,23 @@ class FormLogin extends StatelessWidget {
   }
 
   Widget _txtFieldPassword() {
-    return Container(
+    return  Container(
       margin: const EdgeInsets.symmetric(horizontal: 40),
-      child: TextField(
+      child: Obx(() => TextField(
         controller: con.passwordController,
         keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration: const InputDecoration(
-            hintText: 'Contraseña', prefixIcon: Icon(Icons.lock)),
-      ),
+        obscureText: con.isPasswordHidden.value,
+        decoration: InputDecoration(
+            hintText: 'Contraseña', prefixIcon: const Icon(Icons.lock),
+            suffix: InkWell(
+              child: Icon(con.isPasswordHidden.value ? 
+                Icons.visibility : Icons.visibility_off, color: Colors.grey, size: 20,),
+              onTap: (){
+                  con.isPasswordHidden.value = 
+                  !con.isPasswordHidden.value;
+              },
+            )),
+      ),)
     );
   }
 

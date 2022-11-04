@@ -9,6 +9,7 @@ class LoginController extends GetxController{
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  var isPasswordHidden = true.obs;
 
   UserProvider userProvider = UserProvider();
   
@@ -31,6 +32,8 @@ class LoginController extends GetxController{
         } else {
           goToClientHomePage();
         }
+      } else {
+        Get.snackbar("Error", responseApi.message!);
       }
     }
   }

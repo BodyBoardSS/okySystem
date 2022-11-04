@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guanacos_app/src/pages/register/register_controller.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 // ignore: must_be_immutable
 class FormRegister extends StatelessWidget {
   FormRegister({Key? key}) : super(key: key);
+
+  final maskFormatter = MaskTextInputFormatter(
+    mask: '####-####'
+  );
   
   RegisterController registerController = Get.put(RegisterController());
 
@@ -87,9 +92,13 @@ class FormRegister extends StatelessWidget {
       margin:const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: registerController.phoneController,
-        keyboardType: TextInputType.phone,
+        keyboardType: TextInputType.number,
         decoration:const InputDecoration(
-            hintText: 'Telefono', prefixIcon: Icon(Icons.phone)),
+            hintText: 'Telefono', prefixIcon: Icon(Icons.phone)
+        ),
+        inputFormatters: [
+          maskFormatter
+        ],
       ),
     );
   }
@@ -97,27 +106,47 @@ class FormRegister extends StatelessWidget {
   Widget _txtFieldPassword() {
     return Container(
       margin:const EdgeInsets.symmetric(horizontal: 20),
-      child: TextField(
+      child: Obx(() => TextField(
         controller: registerController.passwordController,
         keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration:const InputDecoration(
-            hintText: 'Contraseña', prefixIcon: Icon(Icons.lock)),
-      ),
+        obscureText: registerController.isPasswordHidden.value,
+        decoration: InputDecoration(
+            hintText: 'Contraseña', prefixIcon: const Icon(Icons.lock),
+            suffix: InkWell(
+              child: Icon(
+                registerController.isPasswordHidden.value ? 
+                Icons.visibility : Icons.visibility_off, color: Colors.grey, size: 20,),
+              onTap: (){
+                  registerController.isPasswordHidden.value = 
+                  !registerController.isPasswordHidden.value;
+              },
+            )    
+        ),
+      ),)
     );
   }
 
   Widget _txtFieldConfirmPassword() {
     return Container(
       margin:const EdgeInsets.symmetric(horizontal: 20),
-      child: TextField(
+      child:Obx(() => TextField(
         controller: registerController.confirmPasswordController,
         keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration:const InputDecoration(
+        obscureText: registerController.isPasswordConfirmHidden.value,
+        decoration: InputDecoration(
             hintText: 'Confirmar Contraseña',
-            prefixIcon: Icon(Icons.lock_outline)),
-      ),
+            prefixIcon: const Icon(Icons.lock_outline),
+            suffix: InkWell(
+              child: Icon(
+                registerController.isPasswordConfirmHidden.value ? 
+                Icons.visibility: Icons.visibility_off, color: Colors.grey, size: 20,),
+              onTap: (){
+                  registerController.isPasswordConfirmHidden.value = 
+                  !registerController.isPasswordConfirmHidden.value;
+              },
+            )
+        ),
+      ),)
     );
   }
 
@@ -150,7 +179,7 @@ Widget imageUser(BuildContext context) {
           builder: (value) => CircleAvatar(
             backgroundImage: registerController.imgFile != null
                 ? FileImage(registerController.imgFile!)
-                :const AssetImage('assets/img/user_profile.png') as ImageProvider,
+                :const AssetImage('assets/img/user_profile_plus.png') as ImageProvider,
             radius: 60,
             backgroundColor: Colors.amber,
           ),

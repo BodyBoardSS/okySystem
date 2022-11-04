@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: guanacos-api-deployment
-  namespace: default
   labels:
     app: guanacos-api
 spec:
@@ -15,16 +14,10 @@ spec:
       labels:
         app: guanacos-api
     spec:
-      serviceAccountName: ksa-cloud-sql
-      nodeSelector:
-        iam.gke.io/gke-metadata-server-enabled: "true"
+      serviceAccountName: ksa-guanacosapp
       containers:
       - name: guanacos-api
         image: bodyboardss/guanacos_api:latest
-        resources:
-        limits:
-          memory: 512Mi
-          cpu: "1"
         ports:
         - containerPort: 3001
         env:
@@ -59,22 +52,6 @@ spec:
         image: gcr.io/cloudsql-docker/gce-proxy:latest
         command:
           - "/cloud_sql_proxy"
-          - "-instances=dev-truth-366803:us-central1:guanacosbd=tcp:0.0.0.0:3306"
+          - "-instances=<INSTANCE_CONNECTION_NAME>=tcp:3306"
         securityContext:
           runAsNonRoot: true
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: guanacosapi-service
-  labels:
-    deployment: guanacos-api
-spec:
-  selector:
-    app: guanacos-api
-  type: LoadBalancer
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3001
-    nodePort: 31115

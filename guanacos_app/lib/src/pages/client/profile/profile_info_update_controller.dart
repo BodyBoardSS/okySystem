@@ -101,7 +101,14 @@ class ProfileUpdateController extends GetxController{
           Get.back();
           selectImage(ImageSource.gallery);
         },
-        child: const Text('Gallery')
+        child: const Text(
+          'Galería',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.bold
+          )
+        )
     );
 
     Widget cameraButton = ElevatedButton(
@@ -109,7 +116,14 @@ class ProfileUpdateController extends GetxController{
           Get.back();
           selectImage(ImageSource.camera);
         },
-        child: const Text('Camera')
+        child: const Text(
+          'Camara',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.bold
+          )
+        )
     );
 
     AlertDialog alertDialog = AlertDialog(
