@@ -11,6 +11,7 @@ class ClientHomeController extends GetxController{
   var indexTab = 0.obs;
 
   ClientHomeController(){
+    update();
     saveToken();
   }
 

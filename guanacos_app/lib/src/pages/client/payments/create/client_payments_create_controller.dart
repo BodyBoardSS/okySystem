@@ -8,12 +8,16 @@ import 'package:guanacos_app/src/models/order.dart';
 import 'package:guanacos_app/src/models/product.dart';
 import 'package:guanacos_app/src/models/response_api.dart';
 import 'package:guanacos_app/src/models/user.dart';
+import 'package:guanacos_app/src/pages/client/orders/create/client_orders_create_controller.dart';
+import 'package:guanacos_app/src/pages/client/products/list/client_products_list_controller.dart';
 import 'package:guanacos_app/src/providers/orders_provider.dart';
 
 class ClientPaymentsCreateController extends GetxController {
   User user = User.fromJson(GetStorage().read('user') ?? {});
   
   OrdersProvider ordersProvider = OrdersProvider();
+  ClientProductsListController productsListController = Get.find();
+  ClientOrdersCreateController clientOrdersCreateController = Get.find();
 
   void createOrder() async {
     Address a = GetStorage().read('address') is Address
@@ -40,6 +44,9 @@ class ClientPaymentsCreateController extends GetxController {
 
     if (responseApi.success == true) {
       GetStorage().remove('shoppinBag');
+      productsListController.items.value = 0;
+      productsListController.lstProducts = [];
+      clientOrdersCreateController.lstProducts = [];
       Get.toNamed('/client/home');
       update();
     }

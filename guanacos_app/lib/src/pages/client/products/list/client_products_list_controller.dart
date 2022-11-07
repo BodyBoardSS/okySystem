@@ -35,10 +35,12 @@ class ClientProductsListController extends GetxController{
       }
 
     }
+    update();
   } 
 
   void goToOrderCreate(){
     Get.toNamed('/client/orders/create');
+    update();
   } 
 
   void getCategories() async{

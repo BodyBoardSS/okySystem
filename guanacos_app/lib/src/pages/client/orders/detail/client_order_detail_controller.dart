@@ -14,6 +14,7 @@ class ClientOrderDetailController extends GetxController{
   List<User> users = <User>[].obs;
 
   ClientOrderDetailController(){
+    update();
     order.products?.addAll(Get.arguments['products']);
   }
 

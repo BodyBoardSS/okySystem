@@ -9,8 +9,19 @@ import 'package:guanacos_app/src/pages/client/products/list/client_products_list
 class ClientProductsDetailController extends GetxController {
   List<Product> lstProducts = [];
 
-  ClientProductsDetailController();
   ClientProductsListController clientProductsListController = Get.find();
+
+  ClientProductsDetailController(){
+    if (GetStorage().read('shoppinBag') != null) {
+      if (GetStorage().read('shoppinBag') is List<Product>) {
+        lstProducts = GetStorage().read('shoppinBag');
+      } else {
+        lstProducts = Product.fromJsonList(GetStorage().read('shoppinBag'));
+      }
+    } else {
+      update();
+    }
+  }
 
   void checkProductsAdded(Product product, var price, var counter) {
     price.value = product.price ?? 0.0;
@@ -26,20 +37,20 @@ class ClientProductsDetailController extends GetxController {
         counter.value = lstProducts[index].quantity ?? 0;
         price.value = roundDouble((product.price! * counter.value),2);
       }
+    } else {
+      update();
     }
   }
 
   void addItem(Product product, var price, var counter) {
     counter.value = counter.value + 1;
     price.value = roundDouble((product.price! * counter.value),2);
-    modifyNumberBag();
   }
 
   void removeItem(Product product, var price, var counter) {
     if (counter.value > 0) {
       counter.value = counter.value - 1;
       price.value = roundDouble((product.price! * counter.value),2);
-      modifyNumberBag();
     }
   }
 
@@ -62,20 +73,19 @@ class ClientProductsDetailController extends GetxController {
       }
 
       GetStorage().write('shoppinBag', lstProducts);
-
-      Fluttertoast.showToast(msg: 'Producto agregado');
       modifyNumberBag();
+      update();
+      Get.offNamedUntil('/client/home', (route) => false);
+      Fluttertoast.showToast(msg: 'Producto agregado');
     } else {
-      Fluttertoast.showToast(
-          msg: 'Se debe seleccionar al menus un item para agregar.');
+      Fluttertoast.showToast(msg: 'Se debe seleccionar al menus un item para agregar.');
     }
   }
 
   void modifyNumberBag() {
     clientProductsListController.items.value = 0;
     for (var p in lstProducts) {
-      clientProductsListController.items.value =
-          clientProductsListController.items.value + (p.quantity!);
+      clientProductsListController.items.value = clientProductsListController.items.value + (p.quantity!);
     }
   }
 

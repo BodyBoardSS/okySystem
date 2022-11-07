@@ -90,7 +90,7 @@ module.exports = {
                 if(req.body.status === 'DESPACHADO'){
                     let user = await User.findByPk(req.body.iddelivery);
                     if(user !== undefined && user != null){
-                        PushNotificationController.sendNotification(tokeuser.notificationTokenNoti,{
+                        PushNotificationController.sendNotification(user.notificationToken,{
                             title:'Pedido Asignado',
                             body:'Se le ha asignado un pedido para ser entregado.',
                             id_notification:'1'

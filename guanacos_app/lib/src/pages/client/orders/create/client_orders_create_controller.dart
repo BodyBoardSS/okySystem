@@ -19,15 +19,17 @@ class ClientOrdersCreateController extends GetxController{
         var result = GetStorage().read('shoppinBag');
         lstProducts.clear();
         lstProducts.addAll(result);
-      } else {
+      }else {
         if (GetStorage().read('shopping_bag') != null){
          var result = Product.fromJsonList(GetStorage().read('shopping_bag'));
           lstProducts.clear();
           lstProducts.addAll(result);
         }
-      }
-
+      } 
       getTotal();
+    } else {
+      update();
+      total.value=0.0;
     }
   }
 
