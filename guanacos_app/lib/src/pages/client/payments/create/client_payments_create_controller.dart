@@ -19,4 +19,6 @@ class  ClientPaymentsCreateController extends GetxController{
     cvvCode.value = creditCardModel.cvvCode;
     isCvvFocused.value = creditCardModel.isCvvFocused;
   }
+
+  
 }

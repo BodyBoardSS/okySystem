@@ -43,6 +43,6 @@ class ClientAddressListController extends GetxController{
   }
 
   void goToPaymentsCreate(){
-    Get.toNamed('/client/payments/create');
+    Get.toNamed('/client/payments/list');
   }
 }

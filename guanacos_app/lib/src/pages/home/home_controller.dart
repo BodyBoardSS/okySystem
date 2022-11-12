@@ -7,6 +7,7 @@ class HomeController extends GetxController{
     GetStorage().remove('address');
     GetStorage().remove('products');
     GetStorage().remove('user');
+    GetStorage().remove('paymenMethod');
     Get.offNamedUntil('/', (route) => false);
   }
 }

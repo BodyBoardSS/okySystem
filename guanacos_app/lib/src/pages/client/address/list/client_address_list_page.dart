@@ -32,8 +32,8 @@ class ClientAddressListPage extends StatelessWidget {
           _textSelectAddress(),
           _listAddress(context)
         ],
-      ),
-        ) 
+        ),
+      ) 
     );
   }
 

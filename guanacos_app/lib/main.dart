@@ -13,6 +13,7 @@ import 'package:guanacos_app/src/pages/client/orders/create/client_orders_create
 import 'package:guanacos_app/src/pages/client/orders/detail/client_order_detail_page.dart';
 import 'package:guanacos_app/src/pages/client/orders/map/client_orders_map_page.dart';
 import 'package:guanacos_app/src/pages/client/payments/create/client_payments_create_page.dart';
+import 'package:guanacos_app/src/pages/client/payments/list/client_payments_list_page.dart';
 
 import 'package:guanacos_app/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:guanacos_app/src/pages/client/profile/profile_info_page.dart';
@@ -86,6 +87,7 @@ class _MyAppState extends State<MyApp> {
           GetPage(name: '/client/address/create', page: () => const ClientAddressCreatePage()),
           GetPage(name: '/client/address/list', page: () => ClientAddressListPage()),
           GetPage(name: '/client/payments/create', page: () => ClientPaymentsCreatePage()),
+          GetPage(name: '/client/payments/list', page: () => ClientPaymentsListPage()),
           GetPage(name: '/restaurant/home', page: () => RestaurantHomePage()),
           GetPage(name: '/restaurant/category/create', page: () => const CategoryCreatePage()),
           GetPage(name: '/delivery/home', page: () => DeliveryHomePage()),

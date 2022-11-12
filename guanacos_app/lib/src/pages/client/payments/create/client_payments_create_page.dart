@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
-import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:get/get.dart';
 import 'package:guanacos_app/src/pages/client/payments/create/client_payments_create_controller.dart';
@@ -9,6 +8,8 @@ import 'package:guanacos_app/src/pages/client/payments/create/client_payments_cr
 class ClientPaymentsCreatePage extends StatelessWidget {
 
   ClientPaymentsCreateController con = Get.put(ClientPaymentsCreateController());
+
+  ClientPaymentsCreatePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +23,39 @@ class ClientPaymentsCreatePage extends StatelessWidget {
                 cardHolderName: con.cardHolderName.value,
                 cvvCode: con.cvvCode.value,
                 showBackView: con.isCvvFocused.value,
-                cardBgColor: Colors.black54,
+                cardBgColor: const Color(0xffA47E3B),
                 obscureCardNumber: true,
-                obscureCardCvv: true,
+                obscureCardCvv: false,
                 height: 175,
+                isHolderNameVisible: true,
+                isChipVisible: true,
                 labelCardHolder: 'NOMBRE Y APELLIDO',
-                textStyle: TextStyle(color: Colors.white),
+                textStyle: const TextStyle(color: Colors.black),
                 width: MediaQuery.of(context).size.width,
-                animationDuration: Duration(milliseconds: 1000), 
+                animationDuration: const Duration(milliseconds: 1000), 
+                // ignore: non_constant_identifier_names
                 onCreditCardWidgetChange: (CreditCardBrand ) {  },
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: CreditCardForm(
                   formKey: con.keyForm, // Required
                   onCreditCardModelChange: con.onCreditCardModelChanged, // Required
                   themeColor: Colors.red,
-                  obscureCvv: true,
+                  obscureCvv: false,
                   obscureNumber: true,
-                  cardNumberValidator: (String? cardNumber){},
-                  expiryDateValidator: (String? expiryDate){},
-                  cvvValidator: (String? cvv){},
-                  cardHolderValidator: (String? cardHolderName){},
+                  cardNumberValidator: (String? cardNumber){
+                    return null;
+                  },
+                  expiryDateValidator: (String? expiryDate){
+                    return null;
+                  },
+                  cvvValidator: (String? cvv){
+                    return null;
+                  },
+                  cardHolderValidator: (String? cardHolderName){
+                    return null;
+                  },
                   onFormComplete: () {
                     // callback to execute at the end of filling card data
                   },
@@ -80,13 +92,13 @@ class ClientPaymentsCreatePage extends StatelessWidget {
   Widget _buttonNext(BuildContext context){
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+      margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 15)
+          padding: const EdgeInsets.symmetric(vertical: 15)
         ),
-        child: Text(
+        child: const Text(
           'CONTINUAR',
           style: TextStyle(
             color: Colors.black
