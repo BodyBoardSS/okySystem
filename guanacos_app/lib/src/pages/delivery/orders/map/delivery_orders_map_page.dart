@@ -59,7 +59,7 @@ class DeliveryOrdersMapPage extends StatelessWidget {
       myLocationButtonEnabled: false,
       myLocationEnabled: false,
       markers: Set<Marker>.of(mapController.markers.values),
-      //polylines: mapController.polylines, Activar cuando se tenga una cuenta con servicios de google directions
+      polylines: mapController.polylines
     );
   }
 

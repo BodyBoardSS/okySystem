@@ -98,16 +98,16 @@ class DeliveryOrdersMapController extends GetxController {
       addMarker('delivery', position?.latitude ?? 13.6817911, position?.longitude ?? -89.1922692, 'Tú posición', '', deliveryMarker!);
       addMarker('home', order.address?.lat ?? 13.6817911, order.address?.lng ?? -89.1922692, 'Tú posición', '', homeMarker!);
 
-      //LatLng from = LatLng(position!.latitude, position!.longitude);
-      //LatLng to = LatLng(order.address?.lat ?? 13.6817911, order.address?.lng ?? -89.1922692);
-      //setPolylines(from, to); Activar cuando se tenga una cuenta con servicios de google directions
+      LatLng from = LatLng(position!.latitude, position!.longitude);
+      LatLng to = LatLng(order.address?.lat ?? 13.6817911, order.address?.lng ?? -89.1922692);
+      setPolylines(from, to); 
       LocationSettings locationSettings = const LocationSettings(
         accuracy: LocationAccuracy.best,
         distanceFilter: 1
       );
       positionSubscribe = Geolocator.getPositionStream(
         locationSettings: locationSettings
-      ).listen((Position p) { //Position real time
+      ).listen((Position p) {
         // ignore: unused_label
         position=p;
         addMarker('delivery', position?.latitude ?? 13.6817911, position?.longitude ?? -89.1922692, 'Tú posición', '', deliveryMarker!);
