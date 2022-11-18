@@ -65,7 +65,7 @@ class ClientPaymentsListPage extends StatelessWidget {
       height: 50,
       margin:const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
       child: ElevatedButton(
-          onPressed: () => con.goToPayOrCreate(),
+          onPressed: () => con.goToPayOrCreate(context),
           style: ElevatedButton.styleFrom(
               padding:const EdgeInsets.symmetric(vertical: 15)),
           child:const Text(
